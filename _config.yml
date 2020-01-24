@@ -100,4 +100,4 @@ theme: NexT
 deploy:
   type: git
   repo: git@github.com:RobYang203/RobYang203.github.io.git
-  branch: gh-pages
+  branch: master
