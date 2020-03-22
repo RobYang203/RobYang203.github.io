@@ -2,6 +2,9 @@
 title: JSLearningNote_2019-12-17
 date: 2020-03-02 23:56:34
 ---
+
+https://hackmd.io/yY9M-aGiTuCI0ioZfrN7Vw
+
 ### Primitive type & Object type
 * 在賦值給變數時會決定好是什麼type
 * 賦值給變數
@@ -135,7 +138,7 @@ console.log(b);
 * 代表物件本身
 * 最外層的 **this** 即是 `global object`
 * 有建立新物件 **this**的參考指向才會轉成該物件
-* 當function 沒有綁定物件時，內部 **this**會直接參考 `global object`，不代表綁定在 `global object`底下
+* 當function 沒有綁定物件時，內部 **this**會直接參考 `global object`
 ```js
 console.log(this);//global object
 function gFunc(){

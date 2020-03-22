@@ -2,6 +2,7 @@
 title: JSLearningNote_2019-12-10
 date: 2020-03-02 23:56:14
 ---
+https://hackmd.io/zUtFlU_UT4OpODLQJ8nZyA?view
 
 ### 關於 || 運算子
 * 用於判斷左右兩側值是否存在
