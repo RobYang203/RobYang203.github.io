@@ -49,8 +49,52 @@ testScope();
 console.log(va,vg);
 ```
 
-### 閉包
+### 閉包(Closure)
+* 當建立好 **excution context**，會把`scope`需要的參數都整理好
+* 變數是從 **外部** 引入時，數據會保存在此 `scope`
+* 確保數據的隱密性
+* 減少外部影響
+* 傳遞參數的方式並非使用**function**，而是透過**global variable**
+* 作為一個區域內的公用參數使用
+```js
 
-### 柯里化
+function testClosure(message) {
+    setTimeout(function timer() {
+        console.log(message);
+    }, 1000);
+}
+  
+testClosure('Hello, 閉包!');
 
+function testClosure2(a){
+
+    return function(){
+        console.log("closure = " , a);
+    };
+}
+var ans = testClosure2(10);
+ans();//closure = 10
+```
+### 柯里化(Currying)
+* 將 n 個參數的 function ， 拆解成 1 個參數 n 個 function 
+* 即一個步驟，一個 function
+* 假如不是結尾，function return next function ，以 **closure** 帶入需要此階段的結果
+```js
+// x + y
+function normalFn(x,y){
+    console.log("normalFn x+y : ",x+y);
+}
+function curryingFn(x){
+    console.log("curryingStep1 x: ",x); 
+    return function(y){
+        console.log("curryingStep2 x+y : ",x+y); 
+    };
+}
+
+normalFn(2,3);
+var step1 = curryingFn(2);
+
+step1(3);
+step1(4);
+```
 ### Pure function
