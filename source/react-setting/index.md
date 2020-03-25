@@ -5,11 +5,12 @@ date: 2020-03-25 22:48:37
 
 ## React 設定
 ### 下載套件
-* babel-cli
-* babel-loader
-* babel-preset-es2015 
-* babel-preset-react
-* babel-preset-react-hmre
+* dev 環境
+	* @babel/core
+	* @babel/preset-env
+	* @babel/preset-react
+	* @babel/core
+	* babel-loader
 * react
 * react-dom 
 
@@ -60,7 +61,7 @@ module.exports={
     * presets 
         * 預設轉譯器
     *  env 
-        1. 針對環境設置
+        * 針對環境設置
 ```json
 {
     "presets": [
