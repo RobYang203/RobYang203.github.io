@@ -54,7 +54,7 @@ module.exports={
 	output:{//編譯輸出點
 		path:path.join(__dirname,"dist"),//輸出路徑
 		filename:"compiled.js",//編譯後的檔名
-		publicPath:"/"//編譯後資源儲存的位置
+		publicPath:"/"//編譯後url位置
 	},
 	resolve:{//當 import | require 時，會去指定目錄尋找 & 解析
 		modules:[
@@ -94,7 +94,7 @@ module.exports={
         * filename
             * 編譯後的檔名
         * publicPath
-            * 編譯後資源儲存的位置
+            * 編譯後url的位置
 * resolve - `obj`
     * 當 import | require 時，會去指定目錄尋找 & 解析
     * 參數

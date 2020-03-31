@@ -53,7 +53,7 @@
 <meta property="og:description" content="React介紹 基於 javaScript 建立的函式庫 模擬 DOM 元素的運作模式 以 Virtual DOM 模式處理 DOM 元素的變化 在記憶體裡模擬 DOM 結構 最後顯示到真實的 DOM 只有結果 在進行真實的 DOM render 時 會先判斷改變的部位，針對那部分做 render   render 時，預設會把此 DOM 裡包含的 全部 re-render   封裝成 React">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-02-27T19:57:21.000Z">
-<meta property="article:modified_time" content="2020-02-27T20:52:48.557Z">
+<meta property="article:modified_time" content="2020-03-30T10:41:03.838Z">
 <meta property="article:author" content="Tony">
 <meta name="twitter:card" content="summary">
 
@@ -334,6 +334,7 @@
 </li>
 </ul>
 <h2 id="life-cycle"><a href="#life-cycle" class="headerlink" title="life cycle"></a>life cycle</h2><ul>
+<li>ver 16.x</li>
 <li>分四階段 <code>Mounting (載入中)</code>、 <code>Updating (更新中)</code> 、 <code>Unmounting(卸載中)</code> 、 <code>error(錯誤)</code><ul>
 <li>Mounting<ul>
 <li>元件建立的流程，還未再入到實體網頁時</li>
@@ -474,6 +475,9 @@
 </li>
 <li>事件說明<ul>
 <li>取得更新前的數據</li>
+<li>回傳直將會變成<code>componentDidUpdate</code>第三個參數</li>
+<li>沒有回傳值，<code>return null</code></li>
+<li>有使用到此事件，需要再加入<code>componentDidUpdate</code>，否則會報錯</li>
 </ul>
 </li>
 <li>參數<ul>
@@ -505,6 +509,10 @@
 </li>
 <li>prevState<ul>
 <li>舊的 state</li>
+</ul>
+</li>
+<li>snapshot<ul>
+<li>由前面<code>getSnapshotBeforeUpdate</code>的回傳值</li>
 </ul>
 </li>
 </ul>

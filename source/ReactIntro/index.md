@@ -115,6 +115,7 @@ date: 2020-02-28 03:57:21
                 ```                
                  
 ## life cycle	
+* ver 16.x
 * 分四階段 `Mounting (載入中)`、 `Updating (更新中)` 、 `Unmounting(卸載中)` 、 `error(錯誤)`
     * Mounting
         * 元件建立的流程，還未再入到實體網頁時
@@ -189,6 +190,9 @@ date: 2020-02-28 03:57:21
                     * render 之後 ， 尚未更新到實體網頁
                 * 事件說明
                     * 取得更新前的數據
+                    * 回傳直將會變成`componentDidUpdate`第三個參數
+                    * 沒有回傳值，`return null`
+                    * 有使用到此事件，需要再加入`componentDidUpdate`，否則會報錯
                 * 參數
                     * prevProps
                         * 舊的 props 
@@ -204,6 +208,8 @@ date: 2020-02-28 03:57:21
                         * 舊的 props 
                     * prevState
                         * 舊的 state
+                    * snapshot
+                        * 由前面`getSnapshotBeforeUpdate`的回傳值
     * Unmounting
         * 流程
             1. componentWillUnmount

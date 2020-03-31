@@ -7,10 +7,19 @@ date: 2020-03-25 22:48:37
 ### 下載套件
 * dev 環境
 	* @babel/core
+		* babel 核心 api
 	* @babel/preset-env
+		* 轉譯 es2015
 	* @babel/preset-react
-	* @babel/core
+		* 轉譯 jsx
 	* babel-loader
+		* babel 轉譯工具
+	* @babel/plugin-proposal-class-properties
+		* 可以在 class 內宣告 Arrow function
+		* 在 `.babelrc`要加上屬性
+	* style-loader 
+	* css-loader
+
 * react
 * react-dom 
 
@@ -40,6 +49,11 @@ module.exports={
 				test:/\.(js|jsx)$/,//判斷是否為".js or jsx"
 				loader:"babel-loader",//編譯器，把符合條件的檔案，編譯成指定樣式
 				exclude:/node_modules/
+			},
+			{
+				test:/\.css$/,//判斷是否為".css"
+				loader:["css-loader","style-loader"],//編譯器，把符合條件的檔案，編譯成指定樣式
+				exclude:/node_modules/
 			}
 		]
 	},
@@ -65,14 +79,23 @@ module.exports={
 ```json
 {
     "presets": [
-        "es2015",
-        "react"
-    ],
-    "env": {
-        "development": {
-            "presets": ["react-hmre"]
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            // 設定需要翻譯 es2015 的瀏覽器最低版本
+            "edge": 17,
+            "firefox": 60,
+            "chrome": 67,
+            "safari": 11.1
+          },
+          // 設定針對 es6 有用到的套件在導入
+          "useBuiltIns": "usage"
         }
-    }
+      ],
+      "@babel/preset-react"
+    ],
+    "plugins": ["transform-class-properties"]
 }
 ```
 
