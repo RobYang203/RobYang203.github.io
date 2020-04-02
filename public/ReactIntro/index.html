@@ -53,7 +53,7 @@
 <meta property="og:description" content="React介紹 基於 javaScript 建立的函式庫 模擬 DOM 元素的運作模式 以 Virtual DOM 模式處理 DOM 元素的變化 在記憶體裡模擬 DOM 結構 最後顯示到真實的 DOM 只有結果 在進行真實的 DOM render 時 會先判斷改變的部位，針對那部分做 render   render 時，預設會把此 DOM 裡包含的 全部 re-render   封裝成 React">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-02-27T19:57:21.000Z">
-<meta property="article:modified_time" content="2020-03-30T10:41:03.838Z">
+<meta property="article:modified_time" content="2020-04-02T13:49:14.470Z">
 <meta property="article:author" content="Tony">
 <meta name="twitter:card" content="summary">
 
@@ -335,7 +335,8 @@
 </ul>
 <h2 id="life-cycle"><a href="#life-cycle" class="headerlink" title="life cycle"></a>life cycle</h2><ul>
 <li>ver 16.x</li>
-<li>分四階段 <code>Mounting (載入中)</code>、 <code>Updating (更新中)</code> 、 <code>Unmounting(卸載中)</code> 、 <code>error(錯誤)</code><ul>
+<li>分四階段 <code>Mounting (載入中)</code>、 <code>Updating (更新中)</code> 、 <code>Unmounting(卸載中)</code> 、 <code>error(錯誤)</code></li>
+<li>針對要被廢除的前面要帶有<code>UNSAFE_</code><ul>
 <li>Mounting<ul>
 <li>元件建立的流程，還未再入到實體網頁時</li>
 <li>流程<ol>
@@ -344,7 +345,7 @@
 <li>只會執行一次</li>
 </ul>
 </li>
-<li>componentWillMount -&gt; <code>17 will remove</code><ul>
+<li><code>UNSAFE_</code>componentWillMount -&gt; <code>17 will remove</code><ul>
 <li>觸發時機<ul>
 <li>建立 Component 時</li>
 </ul>
@@ -407,7 +408,7 @@
 <li>Updating<ul>
 <li>元件畫面更新的流程，再觸發 re-render 會啟用</li>
 <li>流程<ol>
-<li>componentWillReceiveProps(nextProps) -&gt; <code>17 will remove</code><ul>
+<li><code>UNSAFE_</code>componentWillReceiveProps(nextProps) -&gt; <code>17 will remove</code><ul>
 <li>觸發時機<ul>
 <li>從上面傳下來的 props 發生變動時</li>
 </ul>
@@ -442,7 +443,7 @@
 </li>
 </ul>
 </li>
-<li>componentWillUpdate（nextProps, nextState)  -&gt; <code>17 will remove</code><ul>
+<li><code>UNSAFE_</code>componentWillUpdate（nextProps, nextState)  -&gt; <code>17 will remove</code><ul>
 <li>觸發時機<ul>
 <li>render 之前</li>
 </ul>
@@ -476,7 +477,13 @@
 <li>事件說明<ul>
 <li>取得更新前的數據</li>
 <li>回傳直將會變成<code>componentDidUpdate</code>第三個參數</li>
-<li>沒有回傳值，<code>return null</code></li>
+<li>沒有回傳值，<code>return null</code><ul>
+<li>沒有回傳 會有 <strong>Warning</strong><blockquote>
+<p><code>Warning: App.getSnapshotBeforeUpdate(): A snapshot value (or null) must be returned. You have returned undefined.</code></p>
+</blockquote>
+</li>
+</ul>
+</li>
 <li>有使用到此事件，需要再加入<code>componentDidUpdate</code>，否則會報錯</li>
 </ul>
 </li>
@@ -546,7 +553,19 @@
 </li>
 </ul>
 </li>
+<li>當加入 <code>getDerivedStateFromProps</code> | <code>getSnapshotBeforeUpdate</code>，以下事件將不會被觸發<ul>
+<li>componentWillMount</li>
+<li>componentWillReceiveProps</li>
+<li>componentWillUpdate<blockquote>
+<p><a href="https://github.com/RobYang203/React-LifeCycleTest.git" target="_blank" rel="noopener">模擬LifeCycle的程式碼</a></p>
+</blockquote>
+</li>
 </ul>
+</li>
+</ul>
+<h2 id="關於-Render"><a href="#關於-Render" class="headerlink" title="關於 Render"></a>關於 Render</h2><p>React 是以 <strong>Virtual DOM</strong>在做處理，<strong>render</strong>就是真實跟虛擬的分界線</p>
+<p><strong>render</strong>是會把當前<strong>Virtual DOM</strong>里資料渲染到真實畫面</p>
+<p>所以在<strong>render</strong>前會把 這個<strong>Component</strong>包括<code>子Component</code>都準備到<strong>Virtual DOM</strong>，再一起<strong>render</strong>到頁面上</p>
 
       </div>
       
@@ -587,7 +606,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#React"><span class="nav-number">1.</span> <span class="nav-text">React</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#介紹"><span class="nav-number">1.1.</span> <span class="nav-text">介紹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#語法"><span class="nav-number">1.2.</span> <span class="nav-text">語法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#life-cycle"><span class="nav-number">1.3.</span> <span class="nav-text">life cycle</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#React"><span class="nav-number">1.</span> <span class="nav-text">React</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#介紹"><span class="nav-number">1.1.</span> <span class="nav-text">介紹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#語法"><span class="nav-number">1.2.</span> <span class="nav-text">語法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#life-cycle"><span class="nav-number">1.3.</span> <span class="nav-text">life cycle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#關於-Render"><span class="nav-number">1.4.</span> <span class="nav-text">關於 Render</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

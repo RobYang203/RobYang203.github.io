@@ -117,13 +117,14 @@ date: 2020-02-28 03:57:21
 ## life cycle	
 * ver 16.x
 * 分四階段 `Mounting (載入中)`、 `Updating (更新中)` 、 `Unmounting(卸載中)` 、 `error(錯誤)`
+* 針對要被廢除的前面要帶有`UNSAFE_`
     * Mounting
         * 元件建立的流程，還未再入到實體網頁時
         * 流程
             1. constructor
                 * 物件建立時會啟用的地方
                 * 只會執行一次
-            2. componentWillMount -> `17 will remove`
+            2. `UNSAFE_`componentWillMount -> `17 will remove`
                 * 觸發時機
                     * 建立 Component 時
                 * 只會執行一次
@@ -156,7 +157,7 @@ date: 2020-02-28 03:57:21
     * Updating
         * 元件畫面更新的流程，再觸發 re-render 會啟用
         * 流程
-            1. componentWillReceiveProps(nextProps) -> `17 will remove`
+            1. `UNSAFE_`componentWillReceiveProps(nextProps) -> `17 will remove`
                 * 觸發時機
                     * 從上面傳下來的 props 發生變動時
             2. getDerivedStateFromProps
@@ -173,7 +174,7 @@ date: 2020-02-28 03:57:21
                         * 新的 props
                     * nextState
                         * 新的 state
-            4. componentWillUpdate（nextProps, nextState)  -> `17 will remove`
+            4. `UNSAFE_`componentWillUpdate（nextProps, nextState)  -> `17 will remove`
                 * 觸發時機
                     * render 之前
                 * 事件說明
@@ -192,6 +193,8 @@ date: 2020-02-28 03:57:21
                     * 取得更新前的數據
                     * 回傳直將會變成`componentDidUpdate`第三個參數
                     * 沒有回傳值，`return null`
+                        * 沒有回傳 會有 **Warning**
+                            > `Warning: App.getSnapshotBeforeUpdate(): A snapshot value (or null) must be returned. You have returned undefined.`
                     * 有使用到此事件，需要再加入`componentDidUpdate`，否則會報錯
                 * 參數
                     * prevProps
@@ -219,7 +222,20 @@ date: 2020-02-28 03:57:21
         * 流程
             * getDerivedStateFromError
             * componentDidCatch
-                
+* 當加入 `getDerivedStateFromProps` | `getSnapshotBeforeUpdate`，以下事件將不會被觸發
+    * componentWillMount
+    * componentWillReceiveProps
+    * componentWillUpdate
+> [模擬LifeCycle的程式碼](https://github.com/RobYang203/React-LifeCycleTest.git)
+
+## 關於 Render
+React 是以 **Virtual DOM**在做處理，**render**就是真實跟虛擬的分界線
+
+**render**是會把當前**Virtual DOM**里資料渲染到真實畫面
+
+所以在**render**前會把 這個**Component**包括`子Component`都準備到**Virtual DOM**，再一起**render**到頁面上
+
+    
 			
 
 		
