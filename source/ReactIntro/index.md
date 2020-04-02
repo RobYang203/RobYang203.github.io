@@ -226,7 +226,9 @@ date: 2020-02-28 03:57:21
     * componentWillMount
     * componentWillReceiveProps
     * componentWillUpdate
-> [模擬LifeCycle的程式碼](https://github.com/RobYang203/React-LifeCycleTest.git)
+    
+### 模擬 LifeCycle的程式碼
+https://github.com/RobYang203/React-LifeCycleTest.git
 
 ## 關於 Render
 React 是以 **Virtual DOM**在做處理，**render**就是真實跟虛擬的分界線
