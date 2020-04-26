@@ -15,6 +15,7 @@ date: 2020-03-25 22:48:37
 	* babel-loader
 		* babel 轉譯工具
 	* @babel/plugin-proposal-class-properties
+	* babel-plugin-transform-class-properties
 		* 可以在 class 內宣告 Arrow function
 		* 在 `.babelrc`要加上屬性
 	* style-loader 
