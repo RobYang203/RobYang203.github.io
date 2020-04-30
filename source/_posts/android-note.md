@@ -8,4 +8,10 @@ tags:
 - note
 ---
 
+[Activity LifeCycle](/android-lifecycle)
+
+[關於 Layout](android-layout)
+
+[Fcm 設定](/android-fcm-note)
+
 [Q-List](/android-qlist)

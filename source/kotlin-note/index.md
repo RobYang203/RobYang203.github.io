@@ -26,6 +26,25 @@ date: 2020-04-25 23:30:13
             var i ＝ 10
             ```
     * PS. 類型決定好後不能再用**自動轉換**來更改
+### 關於變數 ？ & !!
+* 普通設定時，變數是不會有 **null值**，
+<br/> 有需要的話，需要變數類型後面加上 `？`，
+<br/> 而因為有 **null值**，導致變數不確定是`有`還是`無`，出於安全考量，編譯器會出現錯誤，
+<br/> 當使用者堅持變數不會有 **null值**，可在變數後面加上 `!!`
+```kt
+class RecentUseComparator:Comparator<UsageStats> {
+    override fun compare(lhs: UsageStats?, rhs: UsageStats?): Int {
+        return if(lhs!!.lastTimeUsed > rhs!!.lastTimeUsed){
+            -1
+        }else if(lhs!!.lastTimeUsed == rhs!!.lastTimeUsed){
+            0
+        }else{
+            1
+        }
+    }
+}
+```
+
 ### 基本類型
 * Number Type
     * 整數
@@ -164,7 +183,24 @@ class User:human() {
 }
 ```
 
+### companion object
+* 伴生物件
+* 有聲明的話，物件不需宣告，在系統啟動時會自動建立
+* 從開始到結束只會有這一份物件
+* 相當於 java 的 **static**
+* 可把要設定為靜態的變數跟函式都放在裡面
 
+```js
+class User {
+    companion object {
+        var instance = User()
+    }
+
+    fun printlnUser() {
+    }
+}
+User.instance.printlnUser()
+```
 ### if...else
 * 是 Statement(陳述句) 也是 Expression(表達式)
 * 作為表達式時，一定要有 else

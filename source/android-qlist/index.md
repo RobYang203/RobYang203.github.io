@@ -43,4 +43,16 @@ buildscript {
 #### default activity not found
 File > Invalidate Caches / Restart 
 
+
+---
+
+#### Q. Caused by: org.gradle.internal.resolve.ModuleVersionNotFoundException: Could not find com.google.gms:google-services:4.3.3.
+在 build.gradle(Project:xxx)的 repositories 裡的 `google()`一定要排第一個，否則會找不到
+
+---
+
+#### 關於 pendingIntent getActivity
+
+---
+#### 關於 BroadcastReceiver 
 ---
