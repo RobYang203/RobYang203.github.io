@@ -66,7 +66,7 @@ class FCMService: FirebaseMessagingService() {
 
 }
 ```
-5. MainActivity
+6. MainActivity
 	1. FirebaseApp.initializeApp(MainActivity.this);
 		1. 啟動 FCM
 	2. FirebaseInstanceId.getInstance() 
@@ -83,6 +83,7 @@ class FCMService: FirebaseMessagingService() {
 				2. OnFailureListener
 					1. Override
 						1. onFailure
+
 ```kt
 FirebaseApp.initializeApp(this)
 
@@ -109,15 +110,17 @@ fcm.instanceId
         }
     })
 ```
+
 7. AndroidManifest.xml
 	1. 設定 service
-	```xml
-	<service android:name=".FCMTest">
-		<intent-filter>
-			<action android:name="com.google.firebase.MESSAGING_EVENT"/>
-		</intent-filter>
-	</service>
-	```
+	
+```xml
+<service android:name=".FCMTest">
+	<intent-filter>
+		<action android:name="com.google.firebase.MESSAGING_EVENT"/>
+	</intent-filter>
+</service>
+```
 		
 8. NOTE!!!!
 	* 因 android SDK 變化， Firebase SDK 版本也需要配合改變，否則會無法 Sync
