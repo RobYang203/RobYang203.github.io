@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://robyang203.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Hexo說明 可以自動建立一個 Blog  可以把生成的 Blog 檔案放在 Git Page 裡 安裝 (需要先安裝 npm) npm install -g hexo-cli   有多種指令可以來對 Blog 作設定  Hexo 命令 [content] 裡的內容代表可以省略    hexo init [project name]    初始化           project name :">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hexo教學">
+<meta property="og:url" content="https://robyang203.github.io/HexoTech/index.html">
+<meta property="og:site_name" content="Tony&#39;s Blog">
+<meta property="og:description" content="Hexo說明 可以自動建立一個 Blog  可以把生成的 Blog 檔案放在 Git Page 裡 安裝 (需要先安裝 npm) npm install -g hexo-cli   有多種指令可以來對 Blog 作設定  Hexo 命令 [content] 裡的內容代表可以省略    hexo init [project name]    初始化           project name :">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-01-24T14:29:20.000Z">
+<meta property="article:modified_time" content="2020-01-24T16:06:43.266Z">
+<meta property="article:author" content="Tony">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="教學">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://robyang203.github.io/HexoTech/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: false,
+    isPage: true,
+    isArchive: false
+  };
+</script>
+
+  <title>Hexo教學 | Tony's Blog
+  </title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tony's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+  
+  
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+    
+    
+    
+    <div class="post-block" lang="en">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">Hexo教學
+</h1>
+
+<div class="post-meta">
+  
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <h1 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h1><h2 id="說明"><a href="#說明" class="headerlink" title="說明"></a>說明</h2><ul>
+<li>可以自動建立一個 Blog </li>
+<li>可以把生成的 Blog 檔案放在 Git Page 裡</li>
+<li>安裝 <code>(需要先安裝 npm)</code><blockquote>
+<p>npm install -g hexo-cli</p>
+</blockquote>
+</li>
+<li>有多種指令可以來對 Blog 作設定</li>
+</ul>
+<h2 id="Hexo-命令"><a href="#Hexo-命令" class="headerlink" title="Hexo 命令"></a>Hexo 命令</h2><blockquote>
+<p><code>[content]</code> 裡的內容代表可以省略</p>
+</blockquote>
+<ul>
+<li><blockquote>
+<p>hexo init [project name] </p>
+</blockquote>
+<ul>
+<li>初始化          <ol>
+<li><strong>project name</strong> : 這 Blog 專案的名稱 </li>
+<li>有填寫的話，會建立一個 <strong>project name</strong> 的資料夾 </li>
+<li>沒有填寫的話，則會在當下資料夾建立專案 <em>(非空白會報錯)</em></li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>hexo g[enerate]</p>
+<ul>
+<li>編譯檔案為 <strong>html 文件</strong></li>
+<li>編譯後會新增 <strong>public資料夾</strong> 在 <code>專案根目錄</code></li>
+</ul>
+</li>
+<li><p>hexo clean</p>
+<ul>
+<li>清除編譯後的 <strong>public資料夾</strong></li>
+</ul>
+</li>
+<li><p>hexo d[eploy]</p>
+<ul>
+<li>部屬到指定的 Server</li>
+<li>要在 _confing.yml 的 deploy 選項設定</li>
+</ul>
+</li>
+<li><p>hexo s[erver]</p>
+<ul>
+<li>以本機啟動 Server</li>
+<li>默認 Url : <code>localhost:4000</code></li>
+</ul>
+</li>
+<li><p>hexo new [layout] &lt; title &gt;</p>
+<ul>
+<li>建立新文章</li>
+<li>內建三種 <a href="#Layout">layout</a></li>
+<li>預設為 post <strong>layout</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="config-yml"><a href="#config-yml" class="headerlink" title="_config.yml"></a>_config.yml</h2><ul>
+<li>針對這專案 blog 的設定</li>
+<li>格式<ul>
+<li>以 <strong>key： <code>[空白]</code> value</strong> </li>
+<li><strong>value</strong> 跟 <strong>:</strong> 之間一定要空白，不然會報錯<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">url:</span> <span class="string">https://robyang203.github.io/</span></span><br><span class="line"><span class="attr">root:</span> <span class="string">/TestBlog2</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>分類 <code>目前有用到的</code><ul>
+<li>Site<ul>
+<li>Blog 資訊<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="string">TestBlog2</span>    <span class="comment"># 部落格名稱</span></span><br><span class="line"><span class="attr">subtitle:</span> <span class="string">''</span>    </span><br><span class="line"><span class="attr">description:</span> <span class="string">''</span>     <span class="comment"># 描述</span></span><br><span class="line"><span class="attr">keywords:</span></span><br><span class="line"><span class="attr">author:</span> <span class="string">Tony</span>    <span class="comment">#作者</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">en</span>    <span class="comment">#語系</span></span><br><span class="line"><span class="attr">timezone:</span> <span class="string">''</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>URL<ul>
+<li>Blog 路由設定<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">url:</span> <span class="string">https://robyang203.github.io/</span> <span class="comment"># Domain</span></span><br><span class="line"><span class="attr">root:</span> <span class="string">/TestBlog2</span> <span class="comment"># 此網站的根目錄</span></span><br><span class="line"><span class="attr">permalink:</span> <span class="string">:year/:month/:day/:title/</span> <span class="comment"># 文章固定網址</span></span><br><span class="line"><span class="attr">permalink_defaults:</span></span><br><span class="line"><span class="attr">pretty_urls:</span></span><br><span class="line"><span class="attr">trailing_index:</span> <span class="literal">true</span> <span class="comment"># Set to false to remove trailing 'index.html' from permalinks</span></span><br><span class="line"><span class="attr">trailing_html:</span> <span class="literal">true</span> <span class="comment"># Set to false to remove trailing '.html' from permalinks</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>Extension<ul>
+<li>額外添加插件，目前用到 theme<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">theme:</span> <span class="string">Next</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>Deploymemt<ul>
+<li>部署到哪個地方 ， 目前使用 <strong>Github-Pages</strong><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">git</span> <span class="comment">#類型</span></span><br><span class="line">    <span class="attr">repo:</span> <span class="string">git@github.com:RobYang203/TestBlog2.git</span> <span class="comment">#要部署到哪個 repo</span></span><br><span class="line">    <span class="attr">branch:</span> <span class="string">gh-pages</span> <span class="comment">#repo 的分支</span></span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Layout"><a href="#Layout" class="headerlink" title="Layout"></a>Layout</h2><ul>
+<li>預設三種，提供不同的寫作模式<ul>
+<li>post<ul>
+<li>會發佈在主頁 <strong>(Home)</strong> 上</li>
+<li>會在 <strong>source/_post</strong> 資料夾下新增 <code>&lt;title&gt;.md</code>檔</li>
+</ul>
+</li>
+<li>page<ul>
+<li>獨立新增一頁，路徑會是 domain/title</li>
+<li>會在 <strong>source/</strong> 路徑 ，新增 <code>&lt;title&gt;</code> 資料夾，裡面會預設放有 <code>index.md</code> </li>
+</ul>
+</li>
+<li>draft<ul>
+<li>草稿類型，不會顯示在頁面上</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="Categories-amp-Tags"><a href="#Categories-amp-Tags" class="headerlink" title="Categories &amp; Tags"></a>Categories &amp; Tags</h1><ul>
+<li>可提供文章分類的功能</li>
+<li><strong>Categories</strong> 每篇文章只能有一個 ， <strong>Tags</strong> 可以有多個</li>
+<li>只能在 Post文章有</li>
+<li>新增 <strong>Page</strong> 來保存 <blockquote>
+<p>hexo new page [ tags | categories ]</p>
+</blockquote>
+</li>
+<li>再新增文章加入 <code>type</code><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: new Page Namw</span><br><span class="line">date: 2017-05-27 13:47:40</span><br><span class="line">type: ["tags" | "categories"] </span><br><span class="line">---</span><br></pre></td></tr></table></figure></li>
+<li>之後當新增文章時，在資訊頁面添加上<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: Page</span><br><span class="line">date: 2017-05-26 12:12:57</span><br><span class="line">categories: </span><br><span class="line"><span class="bullet">- </span>category1</span><br><span class="line">tags:</span><br><span class="line"><span class="bullet">- </span>tag1</span><br><span class="line"><span class="bullet">- </span>tag2</span><br><span class="line"><span class="bullet">- </span>tag3</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h1 id="NexT-主題"><a href="#NexT-主題" class="headerlink" title="NexT 主題"></a>NexT 主題</h1><ul>
+<li><p>從 <a href="https://github.com/theme-next/hexo-theme-next/releases" target="_blank" rel="noopener">HexT Github</a>下載</p>
+</li>
+<li><p>下載後解壓縮，命名資料夾 <code>Next</code></p>
+</li>
+<li><p>移置 <code>ProjectName/theme</code> 資料夾下</p>
+</li>
+<li><p>設定 _config.yml， <strong>theme</strong> 改為 <code>Next</code> </p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">theme:</span> <span class="string">Next</span></span><br></pre></td></tr></table></figure>
+<h2 id="部屬到-Github-上"><a href="#部屬到-Github-上" class="headerlink" title="部屬到 Github 上"></a>部屬到 Github 上</h2></li>
+<li><p>修改 <code>_config.yml</code>  <strong>deploy 選項</strong></p>
+<ul>
+<li>type 類型</li>
+<li>repo 儲存庫</li>
+<li>branch 分支<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">    type: git </span><br><span class="line">    repo: git@github.com:yourusername&#x2F;yourprojectname.git</span><br><span class="line">    branch: gh-pages</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>設定完後，輸入 <code>hexo d</code> 會自動 push 到指定的 <strong>github branch</strong></p>
+</li>
+</ul>
+<h2 id="Q-List"><a href="#Q-List" class="headerlink" title="Q-List"></a>Q-List</h2><ul>
+<li><p>Q.更新文章後發現內容沒變</p>
+<blockquote>
+<p>A. 有變動文章時會有機率被 cache ，所以最好更新文章後清一次</p>
+</blockquote>
+</li>
+<li><p>Q. </p>
+</li>
+</ul>
+
+      </div>
+      
+      
+      
+    </div>
+    
+
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Hexo"><span class="nav-number">1.</span> <span class="nav-text">Hexo</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#說明"><span class="nav-number">1.1.</span> <span class="nav-text">說明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hexo-命令"><span class="nav-number">1.2.</span> <span class="nav-text">Hexo 命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#config-yml"><span class="nav-number">1.3.</span> <span class="nav-text">_config.yml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Layout"><span class="nav-number">1.4.</span> <span class="nav-text">Layout</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Categories-amp-Tags"><span class="nav-number">2.</span> <span class="nav-text">Categories &amp; Tags</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NexT-主題"><span class="nav-number">3.</span> <span class="nav-text">NexT 主題</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#部屬到-Github-上"><span class="nav-number">3.1.</span> <span class="nav-text">部屬到 Github 上</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Q-List"><span class="nav-number">3.2.</span> <span class="nav-text">Q-List</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Tony</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tony</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

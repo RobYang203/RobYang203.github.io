@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://robyang203.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Scope 程式執行的一個範圍 圈定宣告的變數以及函式存取範圍 分 global scope (全域範圍) &amp; local scope (區域範圍)  存取變數由 內 -&gt; 外 稱為 巢狀範疇 (Nested Scope) 先判斷這變數是否是在本區域建立的 不是 local scope 則會往一層一層往外層找 最外層是 global scope 找到變數時立即停止動作，稱為shado">
+<meta property="og:type" content="website">
+<meta property="og:title" content="JSLearningNote_2020-01-02">
+<meta property="og:url" content="https://robyang203.github.io/JSLearningNote-2020-01-02/index.html">
+<meta property="og:site_name" content="Tony&#39;s Blog">
+<meta property="og:description" content="Scope 程式執行的一個範圍 圈定宣告的變數以及函式存取範圍 分 global scope (全域範圍) &amp; local scope (區域範圍)  存取變數由 內 -&gt; 外 稱為 巢狀範疇 (Nested Scope) 先判斷這變數是否是在本區域建立的 不是 local scope 則會往一層一層往外層找 最外層是 global scope 找到變數時立即停止動作，稱為shado">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-03-02T15:57:04.000Z">
+<meta property="article:modified_time" content="2020-03-24T20:03:50.060Z">
+<meta property="article:author" content="Tony">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://robyang203.github.io/JSLearningNote-2020-01-02/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: false,
+    isPage: true,
+    isArchive: false
+  };
+</script>
+
+  <title>JSLearningNote_2020-01-02 | Tony's Blog
+  </title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tony's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+  
+  
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+    
+    
+    
+    <div class="post-block" lang="en">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">JSLearningNote_2020-01-02
+</h1>
+
+<div class="post-meta">
+  
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <h3 id="Scope"><a href="#Scope" class="headerlink" title="Scope"></a>Scope</h3><ul>
+<li>程式執行的一個範圍</li>
+<li>圈定宣告的變數以及函式存取範圍</li>
+<li>分 <code>global scope (全域範圍)</code> &amp; <code>local scope (區域範圍)</code> </li>
+<li>存取變數由 <code>內 -&gt; 外</code><ul>
+<li>稱為 <code>巢狀範疇 (Nested Scope)</code></li>
+<li>先判斷這變數是否是<strong>在本區域建立的</strong></li>
+<li>不是 <strong>local scope</strong> 則會往一層一層往外層找</li>
+<li>最外層是 <strong>global scope</strong></li>
+<li>找到變數時立即停止動作，稱為<strong>shadowing</strong>  </li>
+<li>外層無法調用內層的資訊</li>
+</ul>
+</li>
+</ul>
+<h3 id="Lexical-Scope"><a href="#Lexical-Scope" class="headerlink" title="Lexical Scope"></a>Lexical Scope</h3><ul>
+<li><p>稱為 <code>語彙範疇</code></p>
+</li>
+<li><p>在建立<code>執行環境(excution context)</code>時，會去判別哪些變數是 <strong>global(外部)</strong> 或是 <strong>local(本身)</strong></p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> va = <span class="string">'globalA'</span>;</span><br><span class="line"><span class="keyword">var</span> vg = <span class="string">'globalG'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//local:  vb,va</span></span><br><span class="line"><span class="comment">//global: vg</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">testScope</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"===== outter func start======"</span>);</span><br><span class="line">    <span class="keyword">var</span> vb = <span class="string">'outterB'</span>;</span><br><span class="line">    <span class="keyword">var</span> va = <span class="string">'@@clone globalA@@'</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(va,vb,vg);</span><br><span class="line"></span><br><span class="line">    testScope2();</span><br><span class="line">    <span class="comment">//local:  vc</span></span><br><span class="line">    <span class="comment">//global: va,vb,vg</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">testScope2</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"===== inner func start======"</span>);</span><br><span class="line">        <span class="keyword">var</span> vc = <span class="string">'innerC'</span>;</span><br><span class="line">        vb = <span class="string">'@@outterB change in testScope2@@'</span>;</span><br><span class="line">        vg = <span class="string">'@@globalG change in testScope2@@'</span>;</span><br><span class="line">        <span class="built_in">console</span>.log(va,vb,vc,vg);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"===== inner func end======"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"===== outter func end======"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">testScope();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(va,vg);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="閉包-Closure"><a href="#閉包-Closure" class="headerlink" title="閉包(Closure)"></a>閉包(Closure)</h3><ul>
+<li>當建立好 <strong>excution context</strong>，會把<code>scope</code>需要的參數都整理好</li>
+<li>變數是從 <strong>外部</strong> 引入時，數據會保存在此 <code>scope</code></li>
+<li>把<strong>非local variables</strong>，拉進<strong>excution context</strong></li>
+<li>確保數據的隱密性</li>
+<li>減少外部影響</li>
+<li>作為一個區域內的公用參數使用  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">testClosure</span>(<span class="params">message</span>) </span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span> <span class="title">timer</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(message);</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">testClosure(<span class="string">'Hello, 閉包!'</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">testClosure2</span>(<span class="params">a</span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"closure = "</span> , a);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> ans = testClosure2(<span class="number">10</span>);</span><br><span class="line">ans();<span class="comment">//closure = 10</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="柯里化-Currying"><a href="#柯里化-Currying" class="headerlink" title="柯里化(Currying)"></a>柯里化(Currying)</h3><ul>
+<li>將 n 個參數的 function ， 拆解成 1 個參數 n 個 function </li>
+<li>即一個步驟，一個 function</li>
+<li>假如不是結尾，function return next function ，以 <strong>closure</strong> 帶入需要此階段的結果  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// x + y</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">normalFn</span>(<span class="params">x,y</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"normalFn x+y : "</span>,x+y);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">curryingFn</span>(<span class="params">x</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"curryingStep1 x: "</span>,x); </span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">y</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"curryingStep2 x+y : "</span>,x+y); </span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">normalFn(<span class="number">2</span>,<span class="number">3</span>);</span><br><span class="line"><span class="keyword">var</span> step1 = curryingFn(<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">step1(<span class="number">3</span>);<span class="comment">//5</span></span><br><span class="line">step1(<span class="number">4</span>);<span class="comment">//6</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="Pure-function"><a href="#Pure-function" class="headerlink" title="Pure function"></a>Pure function</h3><ul>
+<li><p>相同的輸入，相同的輸出</p>
+</li>
+<li><p>不會有額外的<strong>副作用(Side Effect)</strong></p>
+</li>
+<li><p>可移植、可測試</p>
+</li>
+<li><p>不會因為外在環境的變化而改變<strong>function</strong>邏輯</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">10</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">impureFnc</span>(<span class="params">b</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line">impureFnc(<span class="number">5</span>);<span class="comment">//15</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">pureFnc</span>(<span class="params">a,b</span>)</span>&#123;</span><br><span class="line">    retrun a + b;</span><br><span class="line">&#125;</span><br><span class="line">pureFnc(<span class="number">5</span>,<span class="number">10</span>);<span class="comment">//15</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      </div>
+      
+      
+      
+    </div>
+    
+
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Scope"><span class="nav-number">1.</span> <span class="nav-text">Scope</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lexical-Scope"><span class="nav-number">2.</span> <span class="nav-text">Lexical Scope</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#閉包-Closure"><span class="nav-number">3.</span> <span class="nav-text">閉包(Closure)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#柯里化-Currying"><span class="nav-number">4.</span> <span class="nav-text">柯里化(Currying)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pure-function"><span class="nav-number">5.</span> <span class="nav-text">Pure function</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Tony</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tony</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
