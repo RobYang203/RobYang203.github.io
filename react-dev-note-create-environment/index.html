@@ -45,17 +45,19 @@
   };
 </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="標籤">
-<meta property="og:url" content="https://robyang203.github.io/tags/index.html">
+  <meta name="description" content="需要工具NVM簡述管理不同 nodejs 版本的工具 安裝1$ brew install nvm 設定12$ echo &quot;source $(brew --prefix nvm)&#x2F;nvm.sh&quot; &gt;&gt; .bash_profile # 把 nvm.sh 路徑放入到 .bash_profile$ . ~&#x2F;.bash_profile #更新設定  NodeJS簡述在本地端可以執行 javasc">
+<meta property="og:type" content="website">
+<meta property="og:title" content="建立 CRA 開發環境">
+<meta property="og:url" content="https://robyang203.github.io/react-dev-note-create-environment/index.html">
 <meta property="og:site_name" content="Tony&#39;s Blog">
+<meta property="og:description" content="需要工具NVM簡述管理不同 nodejs 版本的工具 安裝1$ brew install nvm 設定12$ echo &quot;source $(brew --prefix nvm)&#x2F;nvm.sh&quot; &gt;&gt; .bash_profile # 把 nvm.sh 路徑放入到 .bash_profile$ . ~&#x2F;.bash_profile #更新設定  NodeJS簡述在本地端可以執行 javasc">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-01-24T14:09:19.000Z">
-<meta property="article:modified_time" content="2021-02-21T17:22:43.759Z">
+<meta property="article:published_time" content="2021-02-22T11:47:16.000Z">
+<meta property="article:modified_time" content="2021-02-22T17:40:32.220Z">
 <meta property="article:author" content="Tony">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://robyang203.github.io/tags/">
+<link rel="canonical" href="https://robyang203.github.io/react-dev-note-create-environment/">
 
 
 <script id="page-configurations">
@@ -69,7 +71,7 @@
   };
 </script>
 
-  <title>標籤 | Tony's Blog
+  <title>建立 CRA 開發環境 | Tony's Blog
   </title>
   
 
@@ -188,7 +190,7 @@
     <div class="post-block" lang="en">
       <header class="post-header">
 
-<h1 class="post-title" itemprop="name headline">標籤
+<h1 class="post-title" itemprop="name headline">建立 CRA 開發環境
 </h1>
 
 <div class="post-meta">
@@ -202,15 +204,30 @@
       
       
       <div class="post-body">
-          <div class="tag-cloud">
-            <div class="tag-cloud-title">
-              1 tag in total
-            </div>
-            <div class="tag-cloud-tags">
-              <a href="/tags/react-js/" style="font-size: 12px; color: #ccc">react-js</a>
-            </div>
-          </div>
-        
+          <h1 id="需要工具"><a href="#需要工具" class="headerlink" title="需要工具"></a>需要工具</h1><h2 id="NVM"><a href="#NVM" class="headerlink" title="NVM"></a>NVM</h2><h3 id="簡述"><a href="#簡述" class="headerlink" title="簡述"></a>簡述</h3><p>管理不同 nodejs 版本的工具</p>
+<h3 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install nvm</span><br></pre></td></tr></table></figure>
+<h3 id="設定"><a href="#設定" class="headerlink" title="設定"></a>設定</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">"source <span class="variable">$(brew --prefix nvm)</span>/nvm.sh"</span> &gt;&gt; .bash_profile <span class="comment"># 把 nvm.sh 路徑放入到 .bash_profile</span></span><br><span class="line">$ . ~/.bash_profile <span class="comment">#更新設定</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="NodeJS"><a href="#NodeJS" class="headerlink" title="NodeJS"></a>NodeJS</h2><h3 id="簡述-1"><a href="#簡述-1" class="headerlink" title="簡述"></a>簡述</h3><p>在本地端可以執行 javascript 的一個開發環境</p>
+<h3 id="安裝-擇一"><a href="#安裝-擇一" class="headerlink" title="安裝(擇一)"></a>安裝(擇一)</h3><ol>
+<li><a href="https://nodejs.org/en/" target="_blank" rel="noopener">官網</a>下載安裝</li>
+<li>Homebrew<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ brew search node <span class="comment">#尋找可安裝版本</span></span><br><span class="line">$ brew install node@&lt;version&gt; <span class="comment">#安裝</span></span><br></pre></td></tr></table></figure></li>
+<li>nvm<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ nvm ls-remote <span class="comment">#尋找可安裝版本</span></span><br><span class="line">$ nvm install &lt;version&gt; <span class="comment"># 安裝</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="Yarn"><a href="#Yarn" class="headerlink" title="Yarn"></a>Yarn</h2><h3 id="簡述-2"><a href="#簡述-2" class="headerlink" title="簡述"></a>簡述</h3><p>package 管理器，管理專案的 package </p>
+<h3 id="安裝-1"><a href="#安裝-1" class="headerlink" title="安裝"></a>安裝</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install yarn <span class="comment"># 安裝</span></span><br></pre></td></tr></table></figure>
+
+
+<h1 id="CRA"><a href="#CRA" class="headerlink" title="CRA"></a>CRA</h1><h2 id="簡述-3"><a href="#簡述-3" class="headerlink" title="簡述"></a>簡述</h2><p>facebook 推出的官方 reactJS Scaffold ， 讓你站在巨人的肩膀上，降低開發技術需求，建立專案後即可開發</p>
+<h2 id="安裝-by-yarn"><a href="#安裝-by-yarn" class="headerlink" title="安裝 by yarn"></a>安裝 by yarn</h2><ul>
+<li>yarn 版本需高過 0.25<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yarn create react-app &lt;app name&gt; <span class="comment"># 安裝</span></span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+
       </div>
       
       
@@ -250,6 +267,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#需要工具"><span class="nav-number">1.</span> <span class="nav-text">需要工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#NVM"><span class="nav-number">1.1.</span> <span class="nav-text">NVM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#簡述"><span class="nav-number">1.1.1.</span> <span class="nav-text">簡述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安裝"><span class="nav-number">1.1.2.</span> <span class="nav-text">安裝</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#設定"><span class="nav-number">1.1.3.</span> <span class="nav-text">設定</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NodeJS"><span class="nav-number">1.2.</span> <span class="nav-text">NodeJS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#簡述-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">簡述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安裝-擇一"><span class="nav-number">1.2.2.</span> <span class="nav-text">安裝(擇一)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Yarn"><span class="nav-number">1.3.</span> <span class="nav-text">Yarn</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#簡述-2"><span class="nav-number">1.3.1.</span> <span class="nav-text">簡述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安裝-1"><span class="nav-number">1.3.2.</span> <span class="nav-text">安裝</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CRA"><span class="nav-number">2.</span> <span class="nav-text">CRA</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#簡述-3"><span class="nav-number">2.1.</span> <span class="nav-text">簡述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安裝-by-yarn"><span class="nav-number">2.2.</span> <span class="nav-text">安裝 by yarn</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
