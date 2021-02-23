@@ -5,7 +5,7 @@ date: 2021-02-22 19:47:16
 # 需要工具
 ## NVM
 ### 簡述
-管理不同 nodejs 版本的工具
+ nodejs 版本管理器
 ### 安裝
 ```sh
 $ brew install nvm
@@ -49,9 +49,9 @@ $ brew install yarn # 安裝
 ## 簡述
 facebook 推出的官方 reactJS Scaffold ， 讓你站在巨人的肩膀上，降低開發技術需求，建立專案後即可開發
 
-## 安裝 by yarn
--  yarn 版本需高過 0.25
+## 安裝 by yarn 
 ``` sh
+# yarn 版本需高過 0.25
 $ yarn create react-app <app name> # 安裝 
 ```
 
