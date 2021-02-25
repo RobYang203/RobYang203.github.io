@@ -65,18 +65,26 @@ $ yarn run eject # 解開 cra 封裝，
 
 ![alt run dev server](./assets/runDevServer.png)
 ## 特色
-- 可以設定環境變數，可針對 development or production 做不同的設定
+- 可以設定環境變數，可針對不同環境做不同的設定
 - 可額外擴充環境變數
 - 測試、打包免設定
 - 內建 dev server，支援 hot reload，遇到衝突可換 port
 - 最基礎的 robot.txt & manifest.json
 - 簡單指令，輕鬆執行打包(build)、本地開發(localhost)
 - 額外客製化 template
-- 支援 arrow function
+- 附加 `browserlist`
+- 支援 
+    - Exponentiation Operator - 指數運算子(**)
+    - async/await 語法
+    - rest/spreed Operator - 解構運算 (...)
+    - dynamic import
+    - Class 宣告 ＆ static 屬性
+    - JSX 語法
+
 
 ## 注意
 - 需要經過 webpack 編譯的檔案(ex: .js .css ...etc)，請放在 `src`資料夾內
-- 程式進入點為 `src/index.js`，不可更改或刪除此檔案
+- 程式進入點為 `src/index.js`，不可**更改名稱**或**刪除此檔案**
 - 打包後的檔案統一放在 `build` 資料夾
 - `public/index.html`為打包後的網頁板模  
 - 不需要任何處理的檔案，但需要放進 `build` 資料夾，可放在 `public` 資料夾 
