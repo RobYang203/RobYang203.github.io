@@ -31,6 +31,10 @@ class App extends Component {
 - 具有 state 機制，可內部自行控制 component `update` 時機
 - 可在 class 內部 override **生命週期** function
 
+### render
+- 在宣告 class component 必須實作的 function
+
+
 ## state & props
 
 ### props
@@ -79,16 +83,39 @@ this.setState(updater, [callback]);
 ```
 - updater 有兩種模式
     - object 
-        - 是以 key-value 方式來更新指定 state value
+        - 是以 key-value 方式來更新指定 state value  
     - function
         - 是會接收`當下`的 state & props ，可以以此為參考基礎來進行更新， return `object` 包裹需要更改的值 
+- `callback` 會在更新流程結束後去執行
+```js
+//object 
+this.setState({text:"hello!"});
+
+//function
+this.setState(function(state , props){
+    return {
+        text: "hello"
+    }
+});
+
+//use callback
+this.setState(function(state , props){
+    return {
+        text: "hello"
+    }
+},function(){
+    console.log(this.state);
+});
+
+```
+#### 注意
+- **setState** 是`非同步`
 - 一次 update 代表一個`循環(cycle)` 
-- function 
+- 假如同一循環同時執行多次 `setState` ， 會依順序更新，但更新循環只會有**一次**
+- 如果需要根據當下 state 值去更新，請用 function 來取得當下最即時的 state
 
 ### ref
 
-### render
-- 在宣告 class component 必須實作的 function
 
 
 ## 用 ReactJs 建立 Todo List
