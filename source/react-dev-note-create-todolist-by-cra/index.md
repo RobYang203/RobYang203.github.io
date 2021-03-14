@@ -18,7 +18,7 @@ date: 2021-02-23 18:05:27
 ## 建立 class component
 以 ES6 class 語法糖來宣告並 `extend React.Component`，來建立 component
 
-```jsx
+```js
 class App extends Component {
   render() {
     // jsx
@@ -32,7 +32,11 @@ class App extends Component {
 - 可在 class 內部 override **生命週期** function
 
 ### render
-- 在宣告 class component 必須實作的 function
+- component 的生命週期之一
+- 在 class component 必須實作的 function
+- 主要內容是此 component 要顯示的畫面
+- 要把 `virtual dom` 繪製到 真實 dom 前最後一個步驟
+
 
 
 ## state & props
