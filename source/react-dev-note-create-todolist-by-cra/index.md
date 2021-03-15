@@ -15,6 +15,14 @@ date: 2021-02-23 18:05:27
 - 單一資料流
 - jsx 語法糖
 
+### 注意
+- component 命名以`大駝峰命名(upper camel case)`，否則會報錯
+- html element 對應到 react 的 attributes 的命名：
+  - 基本上會以 `小駝峰命名(lower camel case)`
+  - class => className
+  - for => htmlFor
+
+
 ## 建立 class component
 以 ES6 class 語法糖來宣告並 `extend React.Component`，來建立 component
 
@@ -33,11 +41,17 @@ class App extends Component {
 
 ### render
 - component 的生命週期之一
-- 在 class component 必須實作的 function
-- 主要內容是此 component 要顯示的畫面
-- 要把 `virtual dom` 繪製到 真實 dom 前最後一個步驟
+- 在 class component 內必須實作的 function， 需有返回值
+- **返回值**為將要顯示的畫面，其型別可以有：
+  - react elements
+  - arrays ＆ fragments
+  - string or number
+  - boolean or null
 
-
+### virtual dom
+- 以 js object 來模擬 `real dom`
+- 在 react 裡，所有的操作都是針對 virtual dom，在改變完後才判斷是否要更新 `real dom`
+- 在 virtual dom 上的變化會映射到 `real dom`
 
 ## state & props
 
