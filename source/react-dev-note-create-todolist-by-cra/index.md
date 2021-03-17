@@ -163,10 +163,42 @@ this.setState(
 - 如果需要根據當下 state 值去更新，請用 function 來取得當下最即時的 state
 
 ## ref
+可獲取指定 dom node or react element 內容，
+通常是無法透過 dataflow 來控制畫面的變化，從而需要`直接操作`元素本身  
+像是以下情境：
+  - input value
+  - video play
+  - scroll 位置  
+
+### 用法 
+- 在 constructor 裡使用 `createRef` function 建立 ref 參考
+```js
+  constructor(props) {
+    super(props);
+    this.inputRef = createRef();
+  }
+
+```
+- 在 render function 裡，在指定 component | element 放入 **ref** props
+```js
+  render() {
+    return (
+      <div>
+        <header className="todo-header">
+          <input ref={this.inputRef} />
+          <button onClick={this.createTodoItem}>save</button>
+        </header>
+      </div>
+    );
+  }
+
+```
 
 ## 用 ReactJs 建立 Todo List
 
-## 功能
+### source code
+
+### 功能
 
 - 讀取 todo list
 - 新增 todo item
