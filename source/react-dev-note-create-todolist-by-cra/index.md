@@ -5,6 +5,17 @@ date: 2021-02-23 18:05:27
 
 # todo list
 
+## [source code](https://github.com/TonyYang203/react-todolist-use-cra/tree/create-todo-list-in-app-component)
+
+## 目標
+以 reactJS 單一 component 實作 Todo List相關功能，來了解建立 class  component基本的相關功能
+
+### 實作功能
+- 讀取 todo list
+- 新增 todo item
+- 刪除 todo item
+
+
 ## Component
 
 在 react 是以 component 為基礎單位
@@ -194,12 +205,4 @@ this.setState(
 
 ```
 
-## 用 ReactJs 建立 Todo List
 
-### source code
-
-### 功能
-
-- 讀取 todo list
-- 新增 todo item
-- 刪除 todo item
