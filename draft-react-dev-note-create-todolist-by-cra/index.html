@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://robyang203.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="todo listsource code目標以 reactJS 單一 component 實作 Todo List相關功能，來了解建立 class  component基本的相關功能 實作功能 讀取 todo list 新增 todo item 刪除 todo item  Component在 react 是以 component 為基礎單位 特色： 封裝性 可重複使用 可組合 單一資料流 jsx">
+<meta property="og:type" content="website">
+<meta property="og:title" content="以 CRA 建立 todo list">
+<meta property="og:url" content="https://robyang203.github.io/draft-react-dev-note-create-todolist-by-cra/index.html">
+<meta property="og:site_name" content="Tony&#39;s Blog">
+<meta property="og:description" content="todo listsource code目標以 reactJS 單一 component 實作 Todo List相關功能，來了解建立 class  component基本的相關功能 實作功能 讀取 todo list 新增 todo item 刪除 todo item  Component在 react 是以 component 為基礎單位 特色： 封裝性 可重複使用 可組合 單一資料流 jsx">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-02-23T10:05:27.000Z">
+<meta property="article:modified_time" content="2021-03-18T07:58:53.262Z">
+<meta property="article:author" content="Tony">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://robyang203.github.io/draft-react-dev-note-create-todolist-by-cra/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: false,
+    isPage: true,
+    isArchive: false
+  };
+</script>
+
+  <title>以 CRA 建立 todo list | Tony's Blog
+  </title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tony's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+  
+  
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+    
+    
+    
+    <div class="post-block" lang="en">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">以 CRA 建立 todo list
+</h1>
+
+<div class="post-meta">
+  
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <h1 id="todo-list"><a href="#todo-list" class="headerlink" title="todo list"></a>todo list</h1><h2 id="source-code"><a href="#source-code" class="headerlink" title="source code"></a><a href="https://github.com/TonyYang203/react-todolist-use-cra/tree/create-todo-list-in-app-component" target="_blank" rel="noopener">source code</a></h2><h2 id="目標"><a href="#目標" class="headerlink" title="目標"></a>目標</h2><p>以 reactJS 單一 component 實作 Todo List相關功能，來了解建立 class  component基本的相關功能</p>
+<h3 id="實作功能"><a href="#實作功能" class="headerlink" title="實作功能"></a>實作功能</h3><ul>
+<li>讀取 todo list</li>
+<li>新增 todo item</li>
+<li>刪除 todo item</li>
+</ul>
+<h2 id="Component"><a href="#Component" class="headerlink" title="Component"></a>Component</h2><p>在 react 是以 component 為基礎單位</p>
+<h3 id="特色："><a href="#特色：" class="headerlink" title="特色："></a>特色：</h3><ul>
+<li>封裝性</li>
+<li>可重複使用</li>
+<li>可組合</li>
+<li>單一資料流</li>
+<li>jsx 語法</li>
+</ul>
+<h3 id="簡介"><a href="#簡介" class="headerlink" title="簡介"></a>簡介</h3><ul>
+<li>component 命名以<code>大駝峰命名(upper camel case)</code>，否則會報錯</li>
+<li>html element 對應到 react 的 attributes 的命名：<ul>
+<li>基本上會以 <code>小駝峰命名(lower camel case)</code></li>
+<li>class =&gt; className</li>
+<li>for =&gt; htmlFor</li>
+</ul>
+</li>
+<li>style 內容格式是 <strong>js object</strong><ul>
+<li>attributes 改以<code>小駝峰命名(lower camel case)</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="jsx-語法"><a href="#jsx-語法" class="headerlink" title="jsx 語法"></a>jsx 語法</h2><p>全名為 <strong>javascript XML</strong> ， 是以模擬 html 標籤語法來建立 react element ，來簡化生成時的複雜度</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//create react element function</span></span><br><span class="line"><span class="keyword">const</span> hello = React.createElement(<span class="string">"h1"</span>, <span class="literal">null</span>, <span class="string">"Hello World"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//jsx</span></span><br><span class="line"><span class="keyword">const</span> hello = <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="建立-class-component"><a href="#建立-class-component" class="headerlink" title="建立 class component"></a>建立 class component</h2><p>以 ES6 class 語法糖來宣告並 <code>extend React.Component</code>，來建立 component</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="comment">// jsx</span></span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Hello React<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="特色：-1"><a href="#特色：-1" class="headerlink" title="特色："></a>特色：</h3><ul>
+<li>具有 state 機制，可內部自行控制 component <code>update</code> 時機</li>
+<li>可在 class 內部 override <strong>生命週期</strong> function</li>
+</ul>
+<h3 id="render"><a href="#render" class="headerlink" title="render"></a>render</h3><ul>
+<li>component 的生命週期之一</li>
+<li>在 class component 內必須實作的 function， 需有返回值</li>
+<li><strong>返回值</strong>為將要顯示的畫面，其型別可以有：<ul>
+<li>react elements</li>
+<li>arrays ＆ fragments</li>
+<li>string or number</li>
+<li>boolean or null</li>
+</ul>
+</li>
+</ul>
+<h3 id="virtual-dom"><a href="#virtual-dom" class="headerlink" title="virtual dom"></a>virtual dom</h3><ul>
+<li>以 js object 結構 來模擬 <code>real dom</code></li>
+<li>所有的操作都是針對 virtual dom，在改變完後才判斷是否要更新 <code>real dom</code></li>
+<li>在 virtual dom 上的變化會映射到  <code>real dom</code></li>
+</ul>
+<h2 id="state-amp-props"><a href="#state-amp-props" class="headerlink" title="state &amp; props"></a>state &amp; props</h2><h3 id="props"><a href="#props" class="headerlink" title="props"></a>props</h3><ul>
+<li>由 <strong>開發者</strong> 決定<code>開放</code>給 <strong>使用者</strong> 從外部傳入內部去影響 component 狀態的參數</li>
+<li>從外部傳入內部的參數都會放進 <code>props</code> 屬性裡，以物件<code>key-value</code>保存</li>
+<li>props 其值是被 呼叫此 component 的所決定的</li>
+<li>屬性是<strong>唯讀</strong>的，不能改動其值，也<strong>不應該</strong>在內部重新賦值給 props</li>
+<li>能改變 props 值，只有在外部傳入直發生改變時</li>
+<li>改變時會觸發 component 的 update 流程</li>
+</ul>
+<h3 id="state"><a href="#state" class="headerlink" title="state"></a>state</h3><ul>
+<li>代表 component 內部的狀態，會影響內部 rendering or data flow</li>
+<li>封裝在 component 內部， 不會流傳到外部</li>
+<li>一個純物件參數，<code>key-value</code> 形式 ，內容應該是<strong>可序列化</strong></li>
+<li>只在 component 內部</li>
+<li>需要 rendering or data flow 的資料都<strong>應該</strong>放在 state</li>
+<li>除了<strong>初始化</strong>，否則<strong>不應該</strong>直接改動 state</li>
+</ul>
+<h4 id="宣告-初始值"><a href="#宣告-初始值" class="headerlink" title="宣告 初始值"></a>宣告 初始值</h4><ul>
+<li>在 constructor 宣告 state 初始值</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">constructor</span>() &#123;</span><br><span class="line">  <span class="keyword">super</span>();</span><br><span class="line">  <span class="keyword">this</span>.state = &#123;</span><br><span class="line">    todoList: [],</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在 class 內部直接宣告</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  state = &#123;</span><br><span class="line">    todoList: [],</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="this-setState"><a href="#this-setState" class="headerlink" title="this.setState"></a>this.setState</h3><p>更新指定 state ， 並觸發 component 的 update 的流程</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.setState(updater, [callback]);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>updater 有兩種模式<ul>
+<li>object<ul>
+<li>是以 key-value 方式來更新指定 state value</li>
+</ul>
+</li>
+<li>function<ul>
+<li>是會接收<code>當下</code>的 state &amp; props ，可以以此為參考基礎來進行更新， return <code>object</code> 包裹需要更改的值</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>callback</code> 會在更新流程結束後去執行</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//object</span></span><br><span class="line"><span class="keyword">this</span>.setState(&#123; <span class="attr">text</span>: <span class="string">"hello!"</span> &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//function</span></span><br><span class="line"><span class="keyword">this</span>.setState(<span class="function"><span class="keyword">function</span> (<span class="params">state, props</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    text: <span class="string">"hello"</span>,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//use callback</span></span><br><span class="line"><span class="keyword">this</span>.setState(</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params">state, props</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      text: <span class="string">"hello"</span>,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.state);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><ul>
+<li><strong>setState</strong> 是<code>非同步</code></li>
+<li>一次 update 代表一個<code>循環(cycle)</code></li>
+<li>假如同一循環同時執行多次 <code>setState</code> ， 會依順序更新，但更新循環只會有<strong>一次</strong></li>
+<li>如果需要根據當下 state 值去更新，請用 function 來取得當下最即時的 state</li>
+</ul>
+<h2 id="ref"><a href="#ref" class="headerlink" title="ref"></a>ref</h2><p>可獲取指定 dom node or react element 內容，<br>通常是無法透過 dataflow 來控制畫面的變化，從而需要<code>直接操作</code>元素本身<br>像是以下情境：</p>
+<ul>
+<li>input value</li>
+<li>video play</li>
+<li>scroll 位置  </li>
+</ul>
+<h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><ul>
+<li>在 constructor 裡使用 <code>createRef</code> function 建立 ref 參考<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">  <span class="keyword">super</span>(props);</span><br><span class="line">  <span class="keyword">this</span>.inputRef = createRef();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>在 render function 裡，在指定 component | element 放入 <strong>ref</strong> props<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">render() &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;header className=<span class="string">"todo-header"</span>&gt;</span><br><span class="line">        &lt;input ref=&#123;<span class="keyword">this</span>.inputRef&#125; /&gt;</span><br><span class="line">        &lt;button onClick=&#123;<span class="keyword">this</span>.createTodoItem&#125;&gt;save&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>header&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+
+      </div>
+      
+      
+      
+    </div>
+    
+
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#todo-list"><span class="nav-number">1.</span> <span class="nav-text">todo list</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#source-code"><span class="nav-number">1.1.</span> <span class="nav-text">source code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目標"><span class="nav-number">1.2.</span> <span class="nav-text">目標</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#實作功能"><span class="nav-number">1.2.1.</span> <span class="nav-text">實作功能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Component"><span class="nav-number">1.3.</span> <span class="nav-text">Component</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#特色："><span class="nav-number">1.3.1.</span> <span class="nav-text">特色：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#簡介"><span class="nav-number">1.3.2.</span> <span class="nav-text">簡介</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jsx-語法"><span class="nav-number">1.4.</span> <span class="nav-text">jsx 語法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建立-class-component"><span class="nav-number">1.5.</span> <span class="nav-text">建立 class component</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#特色：-1"><span class="nav-number">1.5.1.</span> <span class="nav-text">特色：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#render"><span class="nav-number">1.5.2.</span> <span class="nav-text">render</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#virtual-dom"><span class="nav-number">1.5.3.</span> <span class="nav-text">virtual dom</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#state-amp-props"><span class="nav-number">1.6.</span> <span class="nav-text">state &amp; props</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#props"><span class="nav-number">1.6.1.</span> <span class="nav-text">props</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#state"><span class="nav-number">1.6.2.</span> <span class="nav-text">state</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#宣告-初始值"><span class="nav-number">1.6.2.1.</span> <span class="nav-text">宣告 初始值</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#this-setState"><span class="nav-number">1.6.3.</span> <span class="nav-text">this.setState</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#注意"><span class="nav-number">1.6.3.1.</span> <span class="nav-text">注意</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ref"><span class="nav-number">1.7.</span> <span class="nav-text">ref</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#用法"><span class="nav-number">1.7.1.</span> <span class="nav-text">用法</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Tony</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tony</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
