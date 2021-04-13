@@ -22,8 +22,8 @@ class App extends Component {
     return (
       <div>
         <header className="todo-header">
-          <input ref={this.inputRef} />
-          <button onClick={this.createTodoItem}>save</button>
+          <input />
+          <button>save</button>
         </header>
       </div>
     );
@@ -74,4 +74,4 @@ component 擁有以下特性：
 ### 什麼是 render
 react component life cycle 之一 ， 更改真實DOM前的最後一個動作  
 
-在 **class component** 裡是`必須`要實作的function ， return 此 component 的 react element tree   
+在 **class component** 裡是`必須`要實作的 function ， return 此 component 的 react element tree   
