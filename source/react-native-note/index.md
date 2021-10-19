@@ -47,43 +47,58 @@ react native，不像是 web 那樣有相關的`基本元素 (div 、 span 、 l
 
 針對 react native 管理 畫面切換的套件
 
+Hierarchy ？
+
+畫面以 **Hierarchy** 做區分，有以下幾種：
+
+- Root
+- Modal
+- Overlay
+
+可放置 **Layout** ， 提供以下幾種 :
+
+- Stack
+- Bottom tabs
+- Side Menu
+- External Component
+
 ## 安裝
+
 ### 需求
+
 - node >= 8
 - react-native >= 0.51
+
 ### command
+
 > yarn add react-native-navigation
 
 ## 啟動 navigation
+
 在`index.js`,打上以下指令
+
 ```javascript
 Navigation.events().registerAppLaunchedListener(() => {
   // Each time the event is received you should call Navigation.setRoot
   Navigation.registerComponent('Home', () => Component);
   Navigation.setRoot({
-      root:{
-          component:{
-              name:"Home"
-          }
-      }
+    root: {
+      component: {
+        name: 'Home',
+      },
+    },
   });
 });
-
 ```
 
-- `registerAppLaunchedListener` 是在啟動APP後會觸發的一次性事件，在此做相關初始化的動作
+- `registerAppLaunchedListener` 是在啟動 APP 後會觸發的一次性事件，在此做相關初始化的動作
 
 - `Navigation.registerComponent(component name , react component)`  
-把 react component 註冊至 navigation 賦予 **相關代號(component name)**
- 
-- `Navigation.setRoot(layout)` 設定整體 Layout ，提供以下幾種 Layout:
-    - stack
-    - Bottom tabs
-    - Side Menu
-    - External Component
+  把 react component 註冊至 navigation 賦予 **相關代號(component name)**
+
+- `Navigation.setRoot(layout)` 設定整體 root 結構的 Layout
 
 ## 常用 Command
-
 
 # Question
 
