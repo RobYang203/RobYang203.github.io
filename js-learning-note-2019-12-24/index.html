@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://robyang203.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="https:&#x2F;&#x2F;hackmd.io&#x2F;oQy-dejbQn2Ene5ebQJanQ?both 2019-12-24  Learningarray 以 [] 為空陣列 是一種似列表(list-like)的物件 具有長度(length) 每格位置可存放資訊 資訊包括  物件 (object) 基礎類型 (number 、 string 、 boolean ) 陣列 (array) 函式 (functio">
+<meta property="og:type" content="website">
+<meta property="og:title" content="JSLearningNote_2019-12-24">
+<meta property="og:url" content="https://robyang203.github.io/js-learning-note-2019-12-24/index.html">
+<meta property="og:site_name" content="Tony&#39;s Blog">
+<meta property="og:description" content="https:&#x2F;&#x2F;hackmd.io&#x2F;oQy-dejbQn2Ene5ebQJanQ?both 2019-12-24  Learningarray 以 [] 為空陣列 是一種似列表(list-like)的物件 具有長度(length) 每格位置可存放資訊 資訊包括  物件 (object) 基礎類型 (number 、 string 、 boolean ) 陣列 (array) 函式 (functio">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.imgur.com/pPuFspr.png">
+<meta property="article:published_time" content="2020-03-02T15:56:45.000Z">
+<meta property="article:modified_time" content="2020-03-19T15:55:29.512Z">
+<meta property="article:author" content="Tony">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/pPuFspr.png">
+
+<link rel="canonical" href="https://robyang203.github.io/js-learning-note-2019-12-24/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: false,
+    isPage: true,
+    isArchive: false
+  };
+</script>
+
+  <title>JSLearningNote_2019-12-24 | Tony's Blog
+  </title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tony's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+  
+  
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+    
+    
+    
+    <div class="post-block" lang="en">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">JSLearningNote_2019-12-24
+</h1>
+
+<div class="post-meta">
+  
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <p><a href="https://hackmd.io/oQy-dejbQn2Ene5ebQJanQ?both" target="_blank" rel="noopener">https://hackmd.io/oQy-dejbQn2Ene5ebQJanQ?both</a></p>
+<h1 id="2019-12-24-Learning"><a href="#2019-12-24-Learning" class="headerlink" title="2019-12-24  Learning"></a>2019-12-24  Learning</h1><h3 id="array"><a href="#array" class="headerlink" title="array"></a>array</h3><ul>
+<li>以 <code>[]</code> 為空陣列</li>
+<li>是一種<code>似列表(list-like)</code>的物件</li>
+<li>具有<strong>長度(length)</strong></li>
+<li>每格位置可存放資訊<ul>
+<li>資訊包括 <ul>
+<li>物件 <strong>(object)</strong></li>
+<li>基礎類型 <strong>(number 、 string 、 boolean )</strong></li>
+<li>陣列 <strong>(array)</strong></li>
+<li>函式 <strong>(function)</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>一個陣列裡可以存放不同的資訊</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> i = [</span><br><span class="line">    <span class="number">0</span>,<span class="comment">//number</span></span><br><span class="line">    <span class="string">'greeting'</span>,<span class="comment">//string</span></span><br><span class="line">    <span class="literal">false</span>,<span class="comment">//boolean</span></span><br><span class="line">    &#123;</span><br><span class="line">        name : <span class="string">"tony"</span></span><br><span class="line">    &#125;,<span class="comment">//object</span></span><br><span class="line">    [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],<span class="comment">//array</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"Hello JS!"</span>)</span><br><span class="line">    &#125;<span class="comment">//function</span></span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="comment">//印出陣列</span></span><br><span class="line"><span class="built_in">console</span>.log(i);</span><br><span class="line"></span><br><span class="line"><span class="comment">//遍歷陣列資訊</span></span><br><span class="line">i.map(<span class="function">(<span class="params">item</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(item);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="arguments"><a href="#arguments" class="headerlink" title="arguments"></a>arguments</h3><ul>
+<li>在 <code>function</code> 裡，自帶的參數</li>
+<li>在 <code>function</code> 範圍內輸入 <strong>arguments</strong>，就可以讀取呼叫此函數所帶入的參數</li>
+<li>Arguments object<ul>
+<li>屬於<code>偽陣列</code></li>
+<li>以 object 模仿 array</li>
+<li>有自帶的 length</li>
+<li>可以用 <code>array.prototype.slice.call(argument)</code>轉成 array</li>
+<li>帶入多少參數 <code>arguments.length</code> 就有多長<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">testArgFnc</span>(<span class="params">a,b,c</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">arguments</span>);</span><br><span class="line">    <span class="keyword">var</span> argList = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(argList);    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//arguments.length = 2</span></span><br><span class="line">testArgFnc(<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line"><span class="comment">//arguments.length = 5</span></span><br><span class="line">testArgFnc(<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="spread"><a href="#spread" class="headerlink" title="spread ..."></a>spread <code>...</code></h3><ul>
+<li>展開語法</li>
+<li>能使 <code>array , object , string</code>，展開為單個數值<ul>
+<li>能把展開的數值分配給 array or object</li>
+<li>array 是一個<code>array[index]</code>為單位</li>
+<li>object 是以 <code>key:value</code>為單位</li>
+<li>string 是<code>一個字</code>為單位</li>
+</ul>
+</li>
+<li>在建立 <code>function</code>時，設定參數時可用 <code>...Arags</code> 接住參數<ul>
+<li>會以<strong>陣列</strong>方式呈現</li>
+</ul>
+</li>
+<li>在呼叫<code>function</code>時可用 <code>...args</code>，展開分配給 <code>function</code><blockquote>
+<p><code>p.s object 不行，會報錯</code></p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>];</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"this is a"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br><span class="line"><span class="keyword">var</span> clone_a = [...a];</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"clone_a"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(clone_a);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> b= &#123;<span class="attr">a</span>:<span class="number">1</span>,<span class="attr">b</span>:<span class="string">"test"</span>&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"this is b"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(b);</span><br><span class="line"><span class="keyword">var</span> clone_b = &#123;...b&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"clone_b"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(clone_b);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> c = <span class="string">"testString"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"this is c"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(c);</span><br><span class="line"><span class="keyword">var</span> cloneArray_c = [...c];</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"cloneArray_c"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(cloneArray_c);</span><br><span class="line"><span class="keyword">var</span> cloneObject_c = &#123;...c&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"cloneObject_c"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(cloneObject_c);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">funcSpread</span>(<span class="params">...args</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(args);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">funcCallSpread</span>(<span class="params">args</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(args);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">arguments</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    [Array(5)]</span></span><br><span class="line"><span class="comment">        0: (5) [1, 2, 3, 4, 5]</span></span><br><span class="line"><span class="comment">        length: 1</span></span><br><span class="line"><span class="comment">        __proto__: Array(0)</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">funSpread(a);</span><br><span class="line"><span class="comment">//1</span></span><br><span class="line">funcCallSpread(...a);</span><br></pre></td></tr></table></figure>
+<h3 id="syntax-parsers"><a href="#syntax-parsers" class="headerlink" title="syntax parsers"></a>syntax parsers</h3></li>
+<li>語法分析</li>
+<li>js 的編譯是<code>直譯式(Interpreted)</code>，解析語法是逐字讀取</li>
+<li>如果該字元沒有相對意義的時候會產生錯誤</li>
+<li>js 核心編譯引擎會自動幫你在它認為的句尾上自動加上分號</li>
+</ul>
+<h3 id="function-overloading"><a href="#function-overloading" class="headerlink" title="function overloading"></a>function overloading</h3><ul>
+<li>js 沒有真正意義上的 overloading</li>
+<li>因為是<code>直譯式</code>兩個相同 <code>function name</code>宣告時，後面會蓋掉前面的</li>
+<li>js呼叫 <code>function</code>，給的參數數量可以不用給到全部</li>
+<li>以上述特性可以去模擬 overloading<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">funcOverloading</span>(<span class="params">a,b,c</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">arguments</span>.length === <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"no arg"</span>;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">arguments</span>.length === <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">arguments</span>.length === <span class="number">2</span>)</span><br><span class="line">        <span class="keyword">return</span> a + <span class="string">"-"</span>+ b;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">arguments</span>.length === <span class="number">3</span>)</span><br><span class="line">        <span class="keyword">return</span> a + <span class="string">"-"</span>+ b + <span class="string">"-"</span>+ c;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//no arg</span></span><br><span class="line">funcOverloading();</span><br><span class="line"><span class="comment">//1</span></span><br><span class="line">funcOverloading(<span class="number">1</span>);</span><br><span class="line"><span class="comment">//1-2</span></span><br><span class="line">funcOverloading(<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line"><span class="comment">// 1-2-3</span></span><br><span class="line">funcOverloading(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="Execution-Context"><a href="#Execution-Context" class="headerlink" title="Execution Context"></a>Execution Context</h3></li>
+<li><code>直譯式語言</code>則是必須依賴<code>執行環境 (execution context)</code></li>
+<li>單執行序</li>
+<li>以堆疊的方式保存所有的<code>執行環境</code><ul>
+<li>後面建立的會在上面</li>
+<li>當程式結束後<code>執行環境</code>就會被移除</li>
+</ul>
+</li>
+<li>會有很多個<code>執行環境</code></li>
+<li>一開始會自動建立一個<code>global context (全域執行環境)</code><ul>
+<li><code>global context</code>只會有一個</li>
+<li><code>global context</code> 會一直存在</li>
+</ul>
+</li>
+<li>每個<code>函式(function)</code>會建立一個<code>function context(執行環境)</code></li>
+<li>生成<code>執行環境</code>時會有兩階段<ul>
+<li>建立階段<ul>
+<li>建立 <code>scope chain</code></li>
+<li>宣告變數 &amp; 函式 = <strong>hoisting</strong></li>
+<li>綁定 <strong>this</strong></li>
+<li>建立 <code>Outer Environment</code></li>
+</ul>
+</li>
+<li>執行階段<ul>
+<li>賦值給變數<br><img src="https://i.imgur.com/pPuFspr.png" alt=""></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="hoisting"><a href="#hoisting" class="headerlink" title="hoisting"></a>hoisting</h3><ul>
+<li>提昇</li>
+<li>在<code>執行環境(Execution Context)</code>進入<code>執行階段(Execution Phase)</code>前，對此環境的<code>變數 ＆ 函數</code>先進行宣告</li>
+<li>相當於把<code>變數 ＆ 函數</code>往上拉到程式碼最上層一樣</li>
+<li><code>變數</code>提昇只單純做宣告動作，不會進行賦值，所以初始值會是<strong>undefined</strong><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//success</span></span><br><span class="line">testHoisting();</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">testHoisting</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">//undefined</span></span><br><span class="line">    <span class="built_in">console</span>.log(a);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">10</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(testVarFuncHoisting);</span><br><span class="line"><span class="comment">//error Uncaught TypeError: testVarFuncHoisting is not a function</span></span><br><span class="line">testVarFuncHoisting();</span><br><span class="line"><span class="keyword">var</span> testVarFuncHoisting = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">//undefined</span></span><br><span class="line">    <span class="built_in">console</span>.log(a);</span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">10</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="Immediatelty-Invoked-Function-Expression-IIFE-S"><a href="#Immediatelty-Invoked-Function-Expression-IIFE-S" class="headerlink" title="Immediatelty Invoked Function Expression (IIFE)S"></a>Immediatelty Invoked Function Expression <code>(IIFE)S</code></h3></li>
+<li>定義完馬上就執行的<code>JavaScript function</code><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Function Statement</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">testIIFES</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"test IIFEs"</span>);</span><br><span class="line">&#125;();</span><br><span class="line"></span><br><span class="line"><span class="comment">//Function Expression</span></span><br><span class="line"><span class="keyword">var</span> testIIFES2 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"test IIFEs2"</span>);</span><br><span class="line">&#125;();</span><br></pre></td></tr></table></figure>
+<h3 id="Operator"><a href="#Operator" class="headerlink" title="Operator ()"></a>Operator ()</h3></li>
+<li>Function declaration<ul>
+<li>定義函式</li>
+</ul>
+</li>
+<li>Function Call<ul>
+<li>呼叫 Function時 </li>
+<li><code>()</code>裡面可以帶入函式參數(arguments)</li>
+</ul>
+</li>
+<li>Grouping<ul>
+<li>在一個 <strong>Experssion</strong>有多個<strong>Operator</strong>，對<code>()</code>裡的內容會優先執行</li>
+</ul>
+</li>
+</ul>
+<h3 id="IIFES"><a href="#IIFES" class="headerlink" title="() + IIFES"></a>() + IIFES</h3><ul>
+<li>在程式執行時就可以執行<code>匿名函式</code></li>
+<li>宣告<code>匿名函式</code>無變數承接是會出錯的</li>
+<li>在<code>匿名函式</code>外面加上 <strong>()</strong>，可防止出錯</li>
+<li>函式執行完後直接釋放記憶體</li>
+<li>可以想像 <code>()</code> 就是在執行一個 空 function 只會 <strong>return</strong>參數<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">testParentheses</span>(<span class="params">a</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> t = <span class="number">1</span> + testParentheses(<span class="number">2</span>+<span class="number">8</span>) * <span class="number">2</span> ;</span><br><span class="line"><span class="built_in">console</span>.log(t);<span class="comment">//22</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"test IIFEs3"</span>);</span><br><span class="line">&#125;());</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      </div>
+      
+      
+      
+    </div>
+    
+
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2019-12-24-Learning"><span class="nav-number">1.</span> <span class="nav-text">2019-12-24  Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#array"><span class="nav-number">1.0.1.</span> <span class="nav-text">array</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#arguments"><span class="nav-number">1.0.2.</span> <span class="nav-text">arguments</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#spread"><span class="nav-number">1.0.3.</span> <span class="nav-text">spread ...</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#syntax-parsers"><span class="nav-number">1.0.4.</span> <span class="nav-text">syntax parsers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#function-overloading"><span class="nav-number">1.0.5.</span> <span class="nav-text">function overloading</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Execution-Context"><span class="nav-number">1.0.6.</span> <span class="nav-text">Execution Context</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hoisting"><span class="nav-number">1.0.7.</span> <span class="nav-text">hoisting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Immediatelty-Invoked-Function-Expression-IIFE-S"><span class="nav-number">1.0.8.</span> <span class="nav-text">Immediatelty Invoked Function Expression (IIFE)S</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Operator"><span class="nav-number">1.0.9.</span> <span class="nav-text">Operator ()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IIFES"><span class="nav-number">1.0.10.</span> <span class="nav-text">() + IIFES</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Tony</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tony</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

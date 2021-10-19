@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://robyang203.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Webpack為什麼要用 Webpack 首先，我們要先了解一點，目前網頁組成就是 html、script、css，就這3樣，沒有別的，瀏覽器也只看得懂這三樣   那…其他語言 like sass 、 markdown 、 jsx ….etc 瀏覽器要怎麼看呢?答案就是翻譯阿，就像你聽不懂英文，可以找翻譯幫你翻   Webpack所做的，就是幫你把這些瀏覽器看不懂的，打包成它看得懂的  Webpa">
+<meta property="og:type" content="website">
+<meta property="og:title" content="webpackNote">
+<meta property="og:url" content="https://robyang203.github.io/webpack-note/index.html">
+<meta property="og:site_name" content="Tony&#39;s Blog">
+<meta property="og:description" content="Webpack為什麼要用 Webpack 首先，我們要先了解一點，目前網頁組成就是 html、script、css，就這3樣，沒有別的，瀏覽器也只看得懂這三樣   那…其他語言 like sass 、 markdown 、 jsx ….etc 瀏覽器要怎麼看呢?答案就是翻譯阿，就像你聽不懂英文，可以找翻譯幫你翻   Webpack所做的，就是幫你把這些瀏覽器看不懂的，打包成它看得懂的  Webpa">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-03-25T15:59:32.000Z">
+<meta property="article:modified_time" content="2020-04-30T19:32:04.743Z">
+<meta property="article:author" content="Tony">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://robyang203.github.io/webpack-note/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: false,
+    isPage: true,
+    isArchive: false
+  };
+</script>
+
+  <title>webpackNote | Tony's Blog
+  </title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tony's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+  
+  
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+    
+    
+    
+    <div class="post-block" lang="en">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">webpackNote
+</h1>
+
+<div class="post-meta">
+  
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <h2 id="Webpack"><a href="#Webpack" class="headerlink" title="Webpack"></a>Webpack</h2><h4 id="為什麼要用-Webpack"><a href="#為什麼要用-Webpack" class="headerlink" title="為什麼要用 Webpack"></a>為什麼要用 Webpack</h4><blockquote>
+<p>首先，我們要先了解一點，目前網頁組成就是 html、script、css，就這3樣，沒有別的，瀏覽器也只看得懂這三樣</p>
+</blockquote>
+<blockquote>
+<p>那…其他語言 like sass 、 markdown 、 jsx ….etc 瀏覽器要怎麼看呢?<br>答案就是翻譯阿，就像你聽不懂英文，可以找翻譯幫你翻</p>
+</blockquote>
+<blockquote>
+<p>Webpack所做的，就是幫你把這些瀏覽器看不懂的，打包成它看得懂的</p>
+</blockquote>
+<h4 id="Webpack-的打包"><a href="#Webpack-的打包" class="headerlink" title="Webpack 的打包"></a>Webpack 的打包</h4><blockquote>
+<p>Webpack 的作用是打包，打包還是要經過翻譯的，這些翻譯的部分會由使用者來自訂<br>通常會有進入點 <strong>entry.js</strong> ，</p>
+</blockquote>
+<blockquote>
+<p>經過它可以把需要打包的檔案給處理好，轉成一個 or 多個檔案</p>
+</blockquote>
+<h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><ol>
+<li><p>Webpack 是建立在 nodejs 基礎之上的，所以必須要裝 nodejs，並建立 nodejs 專案 </p>
+<ul>
+<li>npm init</li>
+</ul>
+</li>
+<li><p>下載 Webpack 套件</p>
+<ul>
+<li>npm install webpack webpack-cli –save</li>
+</ul>
+</li>
+<li><p>設定運行指定在 <strong>package.json 的 scripts tag</strong> </p>
+<ul>
+<li>“[command name]”: “webpack  –mode [mode name]”<ul>
+<li>command name<ul>
+<li>設定想用甚麼指令呼叫 webpack</li>
+<li>執行時呼叫 npm run [command name]</li>
+<li>test、start 只需要前面加上 npm</li>
+</ul>
+</li>
+<li>mode name<ul>
+<li>development<ul>
+<li>開發模式，編譯出來的檔案會有清楚的斷點提供debug</li>
+</ul>
+</li>
+<li>production<ul>
+<li>正式模式，編譯出來的檔案不會有斷點<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">"scripts": &#123; </span><br><span class="line">        "webpack": "webpack  --mode development "</span><br><span class="line"> &#125;,</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>新增 <strong>webpack.config.js</strong></p>
+<ul>
+<li><p>此專案 webpack 的設定檔</p>
+</li>
+<li><p>在裡面宣告 config物件，export 成模組</p>
+<pre><code class="js"><span class="keyword">var</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>); <span class="comment">//取得路徑</span>
+<span class="keyword">var</span> webpack = <span class="built_in">require</span>(<span class="string">'webpack'</span>);
+
+<span class="built_in">module</span>.exports={
+  entry:[<span class="comment">//執行點</span>
+      <span class="string">"./main.jsx"</span>
+  ],
+  output:{<span class="comment">//編譯輸出點</span>
+      path:path.join(__dirname,<span class="string">"dist"</span>),<span class="comment">//輸出路徑</span>
+      filename:<span class="string">"compiled.js"</span>,<span class="comment">//編譯後的檔名</span>
+      publicPath:<span class="string">"/"</span><span class="comment">//編譯後url位置</span>
+  },
+  resolve:{<span class="comment">//當 import | require 時，會去指定目錄尋找 &amp; 解析</span>
+      modules:[
+          path.resolve(__dirname,<span class="string">'src'</span>), <span class="string">'node_modules'</span><span class="comment">//尋找指定資料夾</span>
+      ],
+      extensions:[<span class="string">'.js'</span>,<span class="string">'jsx'</span>,<span class="string">'css'</span>,<span class="string">'scss'</span>]<span class="comment">//尋找指定副檔名</span>
+  },
+  <span class="built_in">module</span>:{<span class="comment">//針對不同的語言載入不同的模組 ex:babel、TypeScript，讓其可編譯後輸出成為直譯器所讀的檔案 .js</span>
+      rules:[
+          {
+              test:<span class="regexp">/\.(js|jsx)$/</span>,<span class="comment">//判斷是否為".js or jsx"</span>
+              loader:<span class="string">"babel-loader"</span>,<span class="comment">//編譯器，把符合條件的檔案，編譯成指定樣式</span>
+              exclude:<span class="regexp">/node_modules/</span>
+          }
+      ]
+  },
+  devtool:<span class="string">'cheap-module-eval-source-map'</span>,
+  plugins:[
+      <span class="keyword">new</span> webpack.HotModuleReplacementPlugin(),<span class="comment">//在不更新頁面的情況下更新Module</span>
+      <span class="keyword">new</span> webpack.ProvidePlugin({
+          React:<span class="string">'react'</span>,
+          RectDOM:<span class="string">'react-dom'</span>
+      }),<span class="comment">//建置時，碰到輸入的 key 直接 import，指定 value</span>
+      <span class="keyword">new</span> HtmlWebpackPlugin()<span class="comment">//會根據config設定在，路徑 output.path 建立html文件</span>
+  ]
+};</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="參數"><a href="#參數" class="headerlink" title="參數"></a>參數</h4><ul>
+<li>entry - <code>str array</code><ul>
+<li>進入點，去設定 webpack 解析地進入路徑</li>
+</ul>
+</li>
+<li>output - <code>obj</code><ul>
+<li>編譯輸出點</li>
+<li>參數<ul>
+<li>path<ul>
+<li>輸出路徑</li>
+</ul>
+</li>
+<li>filename<ul>
+<li>編譯後的檔名</li>
+</ul>
+</li>
+<li>publicPath<ul>
+<li>編譯後url的位置</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>resolve - <code>obj</code><ul>
+<li>當 import | require 時，會去指定目錄尋找 &amp; 解析</li>
+<li>參數<ul>
+<li>modules - <code>str array</code><ul>
+<li>尋找指定模組位置資料夾</li>
+</ul>
+</li>
+<li>extensions<ul>
+<li>尋找指定副檔名<blockquote>
+<p>ex: ‘.js’,’.jsx’,’.css’,’.scss’</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>module<ul>
+<li>針對不同的語言載入不同的模組 <code>ex:babel、TypeScript</code>，讓其可編譯後輸出成為直譯器所讀的檔案 </li>
+<li>參數 - <code>obj</code><ul>
+<li>rules - obj array<ul>
+<li>指定規則群</li>
+<li>參數<ul>
+<li>test<ul>
+<li>檢查條件，條件符合執行 loader</li>
+</ul>
+</li>
+<li>loader<ul>
+<li>編譯器，把符合條件的檔案，編譯成指定樣式</li>
+</ul>
+</li>
+<li>exclude<ul>
+<li>排除目標資料夾</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>devtool - <code>str</code><ul>
+<li>debug 的工具</li>
+<li>有七種模式</li>
+</ul>
+</li>
+<li>plugins -  <code>obj array</code><ul>
+<li>插件</li>
+<li>HtmlWebpackPlugin<ul>
+<li><code>npm install html-webpack-plugin --save-dev</code></li>
+<li>根據 webpack.config 設定，導出html文件</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><ul>
+<li><p>Plugin/Preset files are not allowed to export objects, only functions. In K:\Work\TestReact\node_modules\babel-preset-es2015\lib\index.js</p>
+<ul>
+<li>原因:<blockquote>
+<p>babel-loader 版本 在 .babelrc presets 解析的 目標版本錯誤</p>
+</blockquote>
+</li>
+<li>解決方式:<blockquote>
+<p>更換正確目標版本</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>ReferenceError: Unknown option: .preset. Check out <a href="https://babeljs.io/docs/en/babel-core/#options" target="_blank" rel="noopener">https://babeljs.io/docs/en/babel-core/#options</a> for more information about options.</p>
+<ul>
+<li>原因:<blockquote>
+<p>.babelrc  參數設錯</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>Error: Cannot find module ‘@babel/core’</p>
+<ul>
+<li>原因:<blockquote>
+<p>缺少指定套件</p>
+</blockquote>
+</li>
+<li>解決方式:<blockquote>
+<p>安裝上面找不到的套件</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>Module not found: Error: Can’t resolve ‘react-dom’</p>
+<ul>
+<li>原因:<blockquote>
+<p>在 webpack.config.js 的 resolve 少了 node_modules資料夾</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>當安裝完  webpack-cli 後出現<br><code>K:\Work\TestReact2\node_modules\webpack-cli\bin\cli.js:93throw err;ReferenceError: webpack is not defined</code></p>
+<ul>
+<li>原因:<blockquote>
+<p>在 webpack.config.js 裡要宣告 var webpack = require(‘webpack’);</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+
+      </div>
+      
+      
+      
+    </div>
+    
+
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Webpack"><span class="nav-number">1.</span> <span class="nav-text">Webpack</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#為什麼要用-Webpack"><span class="nav-number">1.0.1.</span> <span class="nav-text">為什麼要用 Webpack</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Webpack-的打包"><span class="nav-number">1.0.2.</span> <span class="nav-text">Webpack 的打包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#初始化"><span class="nav-number">1.0.3.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#參數"><span class="nav-number">1.0.4.</span> <span class="nav-text">參數</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Question"><span class="nav-number">2.</span> <span class="nav-text">Question</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Tony</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tony</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

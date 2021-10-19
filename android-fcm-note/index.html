@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://robyang203.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Firebase MessagingFCM (console:https:&#x2F;&#x2F;console.firebase.google.com&#x2F; )註冊接收端 新增專案  專案名(無限制)   新增應用程式  Android 套件名稱 選取APP 的 package name   註冊   下載設定檔 google.services.json  下載後貼到專案目錄的 &#x2F;app 目錄下面   新增 Fireb">
+<meta property="og:type" content="website">
+<meta property="og:title" content="android-fcm-note">
+<meta property="og:url" content="https://robyang203.github.io/android-fcm-note/index.html">
+<meta property="og:site_name" content="Tony&#39;s Blog">
+<meta property="og:description" content="Firebase MessagingFCM (console:https:&#x2F;&#x2F;console.firebase.google.com&#x2F; )註冊接收端 新增專案  專案名(無限制)   新增應用程式  Android 套件名稱 選取APP 的 package name   註冊   下載設定檔 google.services.json  下載後貼到專案目錄的 &#x2F;app 目錄下面   新增 Fireb">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-04-29T17:09:40.000Z">
+<meta property="article:modified_time" content="2020-04-30T19:37:32.047Z">
+<meta property="article:author" content="Tony">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://robyang203.github.io/android-fcm-note/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: false,
+    isPage: true,
+    isArchive: false
+  };
+</script>
+
+  <title>android-fcm-note | Tony's Blog
+  </title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tony's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+  
+  
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+    
+    
+    
+    <div class="post-block" lang="en">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">android-fcm-note
+</h1>
+
+<div class="post-meta">
+  
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <h1 id="Firebase-Messaging"><a href="#Firebase-Messaging" class="headerlink" title="Firebase Messaging"></a>Firebase Messaging</h1><h3 id="FCM-console-https-console-firebase-google-com"><a href="#FCM-console-https-console-firebase-google-com" class="headerlink" title="FCM (console:https://console.firebase.google.com/ )"></a>FCM (console:<a href="https://console.firebase.google.com/" target="_blank" rel="noopener">https://console.firebase.google.com/</a> )</h3><h3 id="註冊接收端"><a href="#註冊接收端" class="headerlink" title="註冊接收端"></a>註冊接收端</h3><ol>
+<li><p>新增專案</p>
+<ol>
+<li>專案名(無限制)</li>
+</ol>
+</li>
+<li><p>新增應用程式</p>
+<ol>
+<li>Android 套件名稱<ol>
+<li>選取APP 的 package name</li>
+</ol>
+</li>
+<li>註冊</li>
+</ol>
+</li>
+<li><p>下載設定檔 google.services.json</p>
+<ol>
+<li>下載後貼到專案目錄的 /app 目錄下面</li>
+</ol>
+</li>
+<li><p>新增 Firebase SDK</p>
+<ul>
+<li><p>開啟 Android studio</p>
+</li>
+<li><p><a href="https://firebase.google.com/docs/android/setup" target="_blank" rel="noopener">最新版本請看這</a></p>
+</li>
+<li><p>build.gradle(Project:PackageName)</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">buildscript &#123;</span><br><span class="line">	dependencies &#123;</span><br><span class="line">		<span class="comment">// Add this line</span></span><br><span class="line">		classpath <span class="string">'com.google.gms:google-services:xxx</span></span><br><span class="line"><span class="string">	&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>build.gradle(Module:app)</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">	<span class="comment">// Add this line</span></span><br><span class="line">	implementation <span class="string">'com.google.firebase:firebase-messaging:xxx'</span></span><br><span class="line">&#125;</span><br><span class="line">...</span><br><span class="line"><span class="comment">// Add to the bottom of the file</span></span><br><span class="line">apply <span class="string">plugin:</span> <span class="string">'com.google.gms.google-services'</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>建立 FCM Service</p>
+<ol>
+<li>建立 extends FirebaseMessagingService 的 class<ol start="2">
+<li>@Override<ol>
+<li>onNewToken<br> 1.取得 Token</li>
+<li>onMessageReceived<ul>
+<li>收取訊息</li>
+<li>RemoteMessage是接收從FCM傳送過來的類別<ul>
+<li>rm.getNotification<ul>
+<li>取得 Notification 格式資料<ul>
+<li>有 title &amp; body</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>rm.getData<ul>
+<li>取得自定義資料 class =  Map&lt;String,String&gt;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight kt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FCMService</span>: <span class="type">FirebaseMessagingService</span></span>() &#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onNewToken</span><span class="params">(token: <span class="type">String</span>)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onNewToken(token)</span><br><span class="line">        Log.w(<span class="string">"FCM Message onNewToken"</span> , token)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onMessageReceived</span><span class="params">(rm: <span class="type">RemoteMessage</span>)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onMessageReceived(rm)</span><br><span class="line">        Log.w(<span class="string">"FCM Message Received"</span> , <span class="string">"title: <span class="subst">$&#123;d?.get(<span class="string">"title"</span>)&#125;</span>, body: <span class="subst">$&#123;d?.get(<span class="string">"body"</span>)&#125;</span>"</span>)</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="6">
+<li>MainActivity<ol>
+<li>FirebaseApp.initializeApp(MainActivity.this);<ol>
+<li>啟動 FCM</li>
+</ol>
+</li>
+<li>FirebaseInstanceId.getInstance() <ol>
+<li>取得 在這個APP FCM 物件</li>
+</ol>
+</li>
+<li>getInstanceId()<ol>
+<li>取得 registerID</li>
+<li>必須設定<ol>
+<li>addOnSuccessListener<ol>
+<li>OnSuccessListener<InstanceIdResult>()<ol>
+<li>Override<ol>
+<li>onSuccess</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>addOnFailureListener <ol>
+<li>取得 registerID 失敗偵測</li>
+<li>OnFailureListener<ol>
+<li>Override<ol>
+<li>onFailure</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight kt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">FirebaseApp.initializeApp(<span class="keyword">this</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> fcm = FirebaseInstanceId.getInstance()</span><br><span class="line"><span class="comment">//註冊fcm</span></span><br><span class="line">fcm.instanceId</span><br><span class="line">    .addOnCompleteListener(<span class="keyword">object</span>:OnCompleteListener&lt;InstanceIdResult&gt;&#123;</span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onComplete</span><span class="params">(task: <span class="type">Task</span>&lt;<span class="type">InstanceIdResult</span>&gt;)</span></span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (!task.isSuccessful) &#123;</span><br><span class="line">                Log.w(<span class="string">"FCM Error"</span>, <span class="string">"getInstanceId failed"</span>, task.exception)</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Get new Instance ID token</span></span><br><span class="line">            token = task.result?.token</span><br><span class="line">            Log.d(<span class="string">"FCM Complete"</span>, token)</span><br><span class="line">            <span class="comment">//  Toast.makeText(baseContext, token, Toast.LENGTH_SHORT).show()</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    .addOnFailureListener(<span class="keyword">object</span> : OnFailureListener&#123;</span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onFailure</span><span class="params">(task: <span class="type">Exception</span>)</span></span> &#123;</span><br><span class="line">            Toast.makeText(baseContext, task.toString() , Toast.LENGTH_SHORT).show()</span><br><span class="line">            Log.w(<span class="string">"FCM Failure"</span>, task.toString())</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
+
+<ol start="7">
+<li>AndroidManifest.xml<ol>
+<li>設定 service</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">service</span> <span class="attr">android:name</span>=<span class="string">".FCMTest"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"com.google.firebase.MESSAGING_EVENT"</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">service</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="8">
+<li>NOTE!!!!<ul>
+<li>因 android SDK 變化， Firebase SDK 版本也需要配合改變，否則會無法 Sync</li>
+<li>建議直接讓系統自己把 SDK版本裝好<ul>
+<li>Tools -&gt; Firebase</li>
+<li>clound messaging</li>
+<li>Set up Firebase Cloud Messaging<ol>
+<li>Connnect your app to Firebase (step 1-3 設定)</li>
+<li>Add FCM to your app<ol>
+<li>按鈕按下去設定好 SDK</li>
+</ol>
+</li>
+<li>Handle messages (step 4-6 設定)</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="發送-REST-API"><a href="#發送-REST-API" class="headerlink" title="發送 REST API"></a>發送 REST API</h3><blockquote>
+<p><a href="https://firebase.google.com/docs/cloud-messaging/migrate-v1" target="_blank" rel="noopener">官方文件</a></p>
+</blockquote>
+<ul>
+<li>有舊版 legacy HTTP ＆ 新版 HTTP v1<ul>
+<li>legacy HTTP <a href="https://firebase.google.com/docs/cloud-messaging/http-server-ref" target="_blank" rel="noopener">介紹</a><ul>
+<li>url   <blockquote>
+<p>POST <a href="https://fcm.googleapis.com/fcm/send" target="_blank" rel="noopener">https://fcm.googleapis.com/fcm/send</a></p>
+</blockquote>
+</li>
+<li>token - 放在 header<blockquote>
+<p>Authorization: key= 在 <strong>FCM console</strong> 專案設定 &gt; Cloud Messaging 的伺服器金鑰</p>
+</blockquote>
+</li>
+<li>傳送格式 - 放在 body payload data Content-Type＝application/json  <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"to"</span>: <span class="string">"/topics/news"</span>,</span><br><span class="line">    <span class="attr">"notification"</span>: &#123;</span><br><span class="line">        <span class="attr">"title"</span>: <span class="string">"Breaking News"</span>,</span><br><span class="line">        <span class="attr">"body"</span>: <span class="string">"New news story available."</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"data"</span>: &#123;</span><br><span class="line">        <span class="attr">"story_id"</span>: <span class="string">"story_12345"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>to - 要傳遞訊息到哪<ul>
+<li>個人- 每個裝置註冊時會有<code>裝置的token</code>，可用來傳遞訊息</li>
+<li>topic - 主題式群體傳送</li>
+</ul>
+</li>
+<li>notification - 通知<ul>
+<li>用這個傳送，裝置會自動顯示 notification，不會用自定 notification 的格式</li>
+<li>格式固定 title &amp; body</li>
+</ul>
+</li>
+<li>data - 自定資料格式</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>新版 HTTP v1<ul>
+<li>url   <blockquote>
+<p>POST <a href="https://fcm.googleapis.com/v1/projects/[project-name]/messages:send" target="_blank" rel="noopener">https://fcm.googleapis.com/v1/projects/[project-name]/messages:send</a></p>
+</blockquote>
+</li>
+<li>token - 放在 header<blockquote>
+<p>Authorization: Bearer &lt;valid Oauth 2.0 token&gt;</p>
+<blockquote>
+<p>token 要額外申請</p>
+</blockquote>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><ul>
+<li>關於 NotRegistered<ul>
+<li>原因:<ol>
+<li>註冊好的 registerID 到期</li>
+</ol>
+</li>
+<li>解析發生次類狀況的原因:<ol>
+<li>APP 刪除</li>
+<li>清過 APP 資料</li>
+<li>token 到期(網路說是4個月)</li>
+<li>App 自己刪除 Instance ID<blockquote>
+<p>P.S. 會有用 Http protocol reference 去執行推送</p>
+</blockquote>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>P.S. 也可以用 FCM console  <a href="https://console.firebase.google.com/" target="_blank" rel="noopener">https://console.firebase.google.com/</a> 去做設定</p>
+</blockquote>
+
+      </div>
+      
+      
+      
+    </div>
+    
+
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Firebase-Messaging"><span class="nav-number">1.</span> <span class="nav-text">Firebase Messaging</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#FCM-console-https-console-firebase-google-com"><span class="nav-number">1.0.1.</span> <span class="nav-text">FCM (console:https:&#x2F;&#x2F;console.firebase.google.com&#x2F; )</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#註冊接收端"><span class="nav-number">1.0.2.</span> <span class="nav-text">註冊接收端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#發送-REST-API"><span class="nav-number">1.0.3.</span> <span class="nav-text">發送 REST API</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Question"><span class="nav-number">1.1.</span> <span class="nav-text">Question</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Tony</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tony</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://robyang203.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="What 控制 Url 使其只會在 本地端(Local) 作用 以 Url 路徑 來管理 Components 的組成  HowInstall npm install react-router-dom  Basic1234567891011121314151617181920212223242526272829303132import React from &quot;react&quot;;import &amp;#123">
+<meta property="og:type" content="website">
+<meta property="og:title" content="react-router note">
+<meta property="og:url" content="https://robyang203.github.io/react-router-note/index.html">
+<meta property="og:site_name" content="Tony&#39;s Blog">
+<meta property="og:description" content="What 控制 Url 使其只會在 本地端(Local) 作用 以 Url 路徑 來管理 Components 的組成  HowInstall npm install react-router-dom  Basic1234567891011121314151617181920212223242526272829303132import React from &quot;react&quot;;import &amp;#123">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-06-14T19:19:09.000Z">
+<meta property="article:modified_time" content="2021-02-18T12:23:28.413Z">
+<meta property="article:author" content="Tony">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://robyang203.github.io/react-router-note/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: false,
+    isPage: true,
+    isArchive: false
+  };
+</script>
+
+  <title>react-router note | Tony's Blog
+  </title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tony's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+  
+  
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+    
+    
+    
+    <div class="post-block" lang="en">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">react-router note
+</h1>
+
+<div class="post-meta">
+  
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <h1 id="What"><a href="#What" class="headerlink" title="What"></a>What</h1><ul>
+<li>控制 Url 使其只會在 <strong>本地端(Local)</strong> 作用</li>
+<li>以 <strong>Url 路徑</strong> 來管理 Components 的組成</li>
+</ul>
+<h1 id="How"><a href="#How" class="headerlink" title="How"></a>How</h1><h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><blockquote>
+<p>npm install react-router-dom</p>
+</blockquote>
+<h2 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">"react"</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; BrowserRouter <span class="keyword">as</span> Router, Route, Link &#125; <span class="keyword">from</span> <span class="string">"react-router-dom"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;Router&gt;</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;ul&gt;</span><br><span class="line">          &lt;li&gt;</span><br><span class="line">            &lt;Link to=<span class="string">"/"</span>&gt;Home&lt;<span class="regexp">/Link&gt;</span></span><br><span class="line"><span class="regexp">          &lt;/</span>li&gt;</span><br><span class="line">          &lt;li&gt;</span><br><span class="line">            &lt;Link to=<span class="string">"/about"</span>&gt;About&lt;<span class="regexp">/Link&gt;</span></span><br><span class="line"><span class="regexp">          &lt;/</span>li&gt;</span><br><span class="line">          &lt;li&gt;</span><br><span class="line">            &lt;Link to=<span class="string">"/topics"</span>&gt;Topics&lt;<span class="regexp">/Link&gt;</span></span><br><span class="line"><span class="regexp">          &lt;/</span>li&gt;</span><br><span class="line">        &lt;<span class="regexp">/ul&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">        &lt;Route path="/</span>about<span class="string">"&gt;</span></span><br><span class="line"><span class="string">          &lt;About /&gt;</span></span><br><span class="line"><span class="string">        &lt;/Route&gt;</span></span><br><span class="line"><span class="string">        &lt;Route path="</span>/topics<span class="string">"&gt;</span></span><br><span class="line"><span class="string">          &lt;Topics /&gt;</span></span><br><span class="line"><span class="string">        &lt;/Route&gt;</span></span><br><span class="line"><span class="string">        &lt;Route path="</span>/<span class="string">"&gt;</span></span><br><span class="line"><span class="string">          &lt;Home /&gt;</span></span><br><span class="line"><span class="string">        &lt;/Route&gt;</span></span><br><span class="line"><span class="string">      &lt;/div&gt;</span></span><br><span class="line"><span class="string">    &lt;/Router&gt;</span></span><br><span class="line"><span class="string">  );</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Router"><a href="#Router" class="headerlink" title="Router"></a>Router</h3><ul>
+<li>路由器，控制 Url 的導向位置</li>
+<li>並監視其變化，判斷會符合那個 <strong>Route</strong></li>
+<li>所有的路由行為皆在路由器裡實現</li>
+<li>沒有加裝 <strong>Switch</strong> ：<ul>
+<li>舊 Component 會先 <strong>Unmount</strong> </li>
+<li>新 Component 再 <strong>Mount</strong></li>
+</ul>
+</li>
+<li>有加裝 <strong>Switch</strong> ：<ul>
+<li>同樣類型、並有相同的 <strong>key</strong> or 尚未設定 <strong>key</strong>  ，會被判定為相同的 Component ， 進行 Update</li>
+<li>非上述狀況，一律參照<code>未加裝 Switch</code></li>
+</ul>
+</li>
+<li>分為：<ul>
+<li>BrowserRouter<ul>
+<li>預設以 <strong>Domain Url/</strong> 為 root</li>
+</ul>
+</li>
+<li>HashRouter<ul>
+<li>預設以 <strong>Domain Url/{hashType}/</strong> 為 root</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="BrowserRouter"><a href="#BrowserRouter" class="headerlink" title="BrowserRouter"></a>BrowserRouter</h4><ul>
+<li>basename : string<ul>
+<li>設定 <strong>root Url</strong></li>
+<li>預設為 <strong>Domain Url/</strong></li>
+</ul>
+</li>
+<li>getUserConfirmation : func<ul>
+<li>自定切換 Url 時的 Confirm</li>
+<li>需要帶有 <code>&lt;Prompt/&gt;</code>，才會執行<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// msg = 確認訊息</span></span><br><span class="line"><span class="comment">// cb = 是否跳轉畫面，true： 跳轉 ，false:取消</span></span><br><span class="line"><span class="keyword">const</span> confrimChange = <span class="function">(<span class="params">msg, cb</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> allowChange = <span class="built_in">window</span>.confirm(msg);</span><br><span class="line">  cb(allowChange);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>forceRefresh : bool<ul>
+<li>在切換 Url 時，會 Refresh 網頁，代表會向 Server 再要一次資料</li>
+<li>預設為 false</li>
+</ul>
+</li>
+<li>keyLength: number<ul>
+<li>設定 object location.key 長度</li>
+<li>預設長度為 6</li>
+</ul>
+</li>
+<li>children : node<ul>
+<li>要實現的路由規則</li>
+</ul>
+</li>
+</ul>
+<h4 id="HashRouter"><a href="#HashRouter" class="headerlink" title="HashRouter"></a>HashRouter</h4><ul>
+<li>basename : string<ul>
+<li>設定 <strong>root Url</strong></li>
+<li>預設為 <strong>Domain Url/{hashType}/</strong></li>
+</ul>
+</li>
+<li>getUserConfirmation : func<ul>
+<li>自定切換 Url 時的 Confirm</li>
+<li>需要帶有 <code>&lt;Prompt/&gt;</code>，才會執行<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// msg = 確認訊息</span></span><br><span class="line"><span class="comment">// cb = 是否跳轉畫面，true： 跳轉 ，false:取消</span></span><br><span class="line"><span class="keyword">const</span> confrimChange = <span class="function">(<span class="params">msg, cb</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> allowChange = <span class="built_in">window</span>.confirm(msg);</span><br><span class="line">  cb(allowChange);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>hashType : string<ul>
+<li>設定 <code>window.location.hash</code> 的表示方法</li>
+<li>型態：<ul>
+<li>slash<blockquote>
+<p>Domain Url/#/{action}</p>
+</blockquote>
+</li>
+<li>noslash<blockquote>
+<p>Domain Url/#{action}</p>
+</blockquote>
+</li>
+<li>hashbang(ajax crawlable)<blockquote>
+<p>Domain Url/#!/{action}</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>children : node<ul>
+<li>要實現的路由規則</li>
+</ul>
+</li>
+</ul>
+<h3 id="Route"><a href="#Route" class="headerlink" title="Route"></a>Route</h3><ul>
+<li><p>路由，設定好路徑(path)，當 Url 符合到 Route，觸發設定好的動作</p>
+</li>
+<li><p>如在同一個 <strong>Route match</strong> ，當 <strong>path</strong> 為 array:</p>
+<ul>
+<li>以 <strong>key</strong> 值去判斷是否為同一個 Component</li>
+<li>不是同一個會把舊 Component Unmount</li>
+<li>再 mounting 新的 Component</li>
+</ul>
+</li>
+<li><p>如有多個 Route，讀取規則:</p>
+<ul>
+<li>由上至下</li>
+<li>把有符合到的 Route 給 render 出來</li>
+<li>未符合到的 Route return null</li>
+</ul>
+</li>
+<li><p>假如在樹狀同一個節點、不同的 Route 裡，指定相同的 Component：</p>
+<ul>
+<li>設定 <code>key</code>， 會被當成不同的 Component ，即有兩個一樣的 Component</li>
+<li>未設定 <code>key</code>，會被當成相同的 Component ，每一次切換只是在 Update Component</li>
+</ul>
+</li>
+<li><p>render method:</p>
+<ul>
+<li>當以 <strong>func</strong> 設定時，會把以下三種物件包成 props object：<ul>
+<li>location</li>
+<li>history</li>
+<li>match</li>
+</ul>
+</li>
+<li>component : func | class<ul>
+<li>當 Url 有 match 到才會觸發</li>
+<li>以 <strong>React.createElement</strong> 建立新的 <code>React Element</code></li>
+</ul>
+</li>
+<li>render : func<ul>
+<li>當 Url 有 match 到才會觸發</li>
+</ul>
+</li>
+<li>children : func | component<ul>
+<li>不管 Url 是否 match 皆會觸發<ul>
+<li>不符合， props.match == null</li>
+<li>符合， props.match != null</li>
+</ul>
+</li>
+<li>有裝 <code>&lt;Switch&gt;</code> 只會 match 時顯示</li>
+<li>以 Component 形式呼叫，只會 match 時顯示<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;Route</span><br><span class="line">    exact</span><br><span class="line">    path=<span class="string">"/children"</span></span><br><span class="line">    children=&#123;(props) =&gt; &#123;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">        &lt;SampleClass</span><br><span class="line">            key=<span class="string">"children"</span></span><br><span class="line">            cb=&#123;cb&#125;</span><br><span class="line">            &#123;...props&#125;</span><br><span class="line">        /&gt;</span><br><span class="line">        );</span><br><span class="line">    &#125;&#125;</span><br><span class="line">    /&gt;</span><br><span class="line">&lt;Route</span><br><span class="line">path=<span class="string">"/component"</span></span><br><span class="line">component=&#123;(props) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">SampleClass</span> <span class="attr">cb</span>=<span class="string">&#123;cb&#125;</span> &#123;<span class="attr">...props</span>&#125;/&gt;</span>;</span></span><br><span class="line"><span class="xml">&#125;&#125;</span></span><br><span class="line"><span class="xml">/&gt;</span></span><br><span class="line"></span><br><span class="line">&lt;Route</span><br><span class="line">path="/render"</span><br><span class="line">render=&#123;(props) =&gt; &#123;</span><br><span class="line">    return (</span><br><span class="line">    &lt;SampleClass key="redner" cb=&#123;cb&#125; &#123;...props&#125; /&gt;</span><br><span class="line">    );</span><br><span class="line">&#125;&#125;</span><br><span class="line">/&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>path : <strong>string | string []</strong></p>
+<ul>
+<li>設定匹配的路徑</li>
+<li>以<a href="https://github.com/pillarjs/path-to-regexp/tree/v1.7.0" target="_blank" rel="noopener">path-to-regexp@^1.7.0</a>為準</li>
+<li>設定帶參數：<ul>
+<li>格式：<ul>
+<li>/action/{:param id}(?)</li>
+</ul>
+</li>
+<li>會在 match.param.{param id} 取得</li>
+<li><strong>?</strong> 是代表參數是可選擇要不要加入</li>
+<li>沒有 <strong>?</strong> ，代表如要 match 必須要輸入完整參數</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>exact : <strong>bool</strong></p>
+<ul>
+<li>預設為 false</li>
+<li>設為 <strong>true</strong> 指定的 Route path ：<code>完全 match</code> 才會觸發 render</li>
+<li>設為 <strong>false</strong> 指定的 Route path ： <code>部分 match</code> 就會觸發 render</li>
+<li>精準部分不包含尾端 <code>/</code> 、 path 的大小寫</li>
+</ul>
+</li>
+<li><p>strict : <strong>bool</strong></p>
+<ul>
+<li>預設為 false</li>
+<li>設為 <strong>true</strong> 指定的 Route path ：會判斷到尾端是否有加<code>/</code></li>
+<li>設為 <strong>false</strong> 指定的 Route path ：單純判別到路徑名</li>
+</ul>
+</li>
+<li><p>sensitive : <strong>bool</strong></p>
+<ul>
+<li>預設為 false</li>
+<li>設為 <strong>true</strong> 指定的 Route path  ： 會去判斷大小寫</li>
+<li>設為 <strong>false</strong> 指定的 Route path  ： 不會去判斷大小寫</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// /about [x]match</span></span><br><span class="line"><span class="comment">// /about/tony [o]match ,id=tony</span></span><br><span class="line">&lt;Route path=<span class="string">"/about/:id"</span>&gt;</span><br><span class="line">    &lt;About  /&gt;</span><br><span class="line">&lt;<span class="regexp">/Route&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ /</span>about [o]match</span><br><span class="line"><span class="comment">// /about/tony [o]match ,id=tony</span></span><br><span class="line">&lt;Route path=<span class="string">"/about/:id?"</span>&gt;</span><br><span class="line">    &lt;About  /&gt;</span><br><span class="line">&lt;<span class="regexp">/Route&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ /</span>about [o]match</span><br><span class="line"><span class="comment">// /about/ [o]match </span></span><br><span class="line"><span class="comment">// /about/tony [x]match </span></span><br><span class="line">&lt;Route exact path=<span class="string">"/about/"</span>&gt;</span><br><span class="line">    &lt;About  /&gt;</span><br><span class="line">&lt;<span class="regexp">/Route&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ /</span>about [x]match</span><br><span class="line"><span class="comment">// /about/ [o]match </span></span><br><span class="line"><span class="comment">// /about/tony [o]match </span></span><br><span class="line">&lt;Route  strict path=<span class="string">"/about/"</span>&gt;</span><br><span class="line">    &lt;About  /&gt;</span><br><span class="line">&lt;<span class="regexp">/Route&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ /</span>about [o]match</span><br><span class="line"><span class="comment">// /About/ [x]match </span></span><br><span class="line"><span class="comment">// /ABOUT [x]match </span></span><br><span class="line">&lt;Route  sensitive path=<span class="string">"/about/"</span>&gt;</span><br><span class="line">    &lt;About  /&gt;</span><br><span class="line">&lt;<span class="regexp">/Route&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Redirect"><a href="#Redirect" class="headerlink" title="Redirect"></a>Redirect</h3><ul>
+<li>觸發後，移至指定Url，渲染該Route 的 Component</li>
+<li>預設以覆蓋當前記錄 <code>history stack</code>，<strong>非新增</strong></li>
+<li>參數<ul>
+<li>to : <strong>string</strong> | <strong>object</strong><ul>
+<li>string : 轉址路徑</li>
+<li>object : 轉址詳細設定<ul>
+<li>pathname :  <strong>string</strong> <ul>
+<li>轉址路徑</li>
+</ul>
+</li>
+<li>search : <strong>string</strong><ul>
+<li>會在 Url 帶入額外的 query string</li>
+<li>Component 的 <strong>this.props.loaction.search</strong>找到傳入參數</li>
+</ul>
+</li>
+<li>hash : <strong>string</strong><ul>
+<li>會在 Url 帶入 hash 參數</li>
+<li>可以在 Component 的 <strong>this.props.loaction.hash</strong>找到傳入參數</li>
+</ul>
+</li>
+<li>state : <strong>object</strong><ul>
+<li>轉址後欲帶入的物件參數</li>
+<li>可在 Component 的 <strong>this.props.loaction.state</strong>找到傳入參數</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>push : <strong>bool</strong><ul>
+<li>預設 <strong>false</strong></li>
+<li>設為 <strong>true</strong> 轉址以<strong>新增 history stack</strong>方式進入記錄</li>
+<li>設為 <strong>false</strong> 轉址以<strong>覆蓋 history stack</strong>方式進入記錄</li>
+</ul>
+</li>
+<li>from : <strong>string</strong><ul>
+<li>指定會觸發轉址的 Url</li>
+<li>未設定，則每次檢視到都會觸發</li>
+<li>在有加裝 <Switch>時：<ul>
+<li>在 <strong>from</strong> 設定額外參數會被帶入 <strong>to</strong></li>
+<li><strong>to</strong> 的 pathname 沒有設定對應參數的話，則會被忽略</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>exact : <strong>bool</strong></li>
+<li>strict : <strong>bool</strong></li>
+<li>sensitive : <strong>bool</strong><ul>
+<li>功效同 <a href="#Route">Route</a><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">// /render3/12 change to /about/12</span></span><br><span class="line">&lt;Switch&gt;</span><br><span class="line">     &lt;Redirect <span class="keyword">from</span>=<span class="string">"/render3/:id"</span> to=&#123;&#123;<span class="attr">pathname</span>:<span class="string">"/about/:id"</span> &#125;&#125; /&gt;</span><br><span class="line"> &lt;<span class="regexp">/Switch&gt;</span></span><br><span class="line"><span class="regexp"> /</span><span class="regexp">/ /</span>render or /render2 change to /about?utm=your+face</span><br><span class="line"> <span class="comment">//  /about's component this.props.location.state.param1 = "hello"</span></span><br><span class="line"> &lt;Route</span><br><span class="line">     path=&#123;[<span class="string">"/render"</span>, <span class="string">"/render2"</span>]&#125;</span><br><span class="line">     render=&#123;(props) =&gt; &#123;</span><br><span class="line"></span><br><span class="line">     <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">Redirect</span> <span class="attr">to</span>=<span class="string">&#123;</span></span></span></span><br><span class="line"><span class="xml">         &#123;</span></span><br><span class="line"><span class="xml">             pathname:"about" , </span></span><br><span class="line"><span class="xml">             search:"?utm=your+face" ,</span></span><br><span class="line"><span class="xml">             state:&#123;</span></span><br><span class="line"><span class="xml">                 param1:"hello"</span></span><br><span class="line"><span class="xml">             &#125;</span></span><br><span class="line"><span class="xml">         &#125;</span></span><br><span class="line"><span class="xml">         &#125; /&gt;;</span></span><br><span class="line"><span class="xml">     &#125;&#125;</span></span><br><span class="line"><span class="xml"> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Link"><a href="#Link" class="headerlink" title="Link"></a>Link</h3><ul>
+<li>建立 Url 導向連結</li>
+<li>to : <strong>string | object</strong><ul>
+<li>設定要導向的Url </li>
+<li>string : 導向路徑，<ul>
+<li>可在 Url 的後面帶入 Query Stirng<code>(?)</code> or hash param <code>(#)</code></li>
+</ul>
+</li>
+<li>object : 導向詳細設定<ul>
+<li>pathname :  <strong>string</strong> <ul>
+<li>導向路徑</li>
+<li>不可帶入其他參數設定，帶入不會有效果</li>
+</ul>
+</li>
+<li>search : <strong>string</strong><ul>
+<li>會在 Url 帶入額外的 query string</li>
+<li>Component 的 <strong>this.props.loaction.search</strong>找到傳入參數</li>
+</ul>
+</li>
+<li>hash : <strong>string</strong><ul>
+<li>會在 Url 帶入 hash 參數</li>
+<li>可以在 Component 的 <strong>this.props.loaction.hash</strong>找到傳入參數</li>
+</ul>
+</li>
+<li>state : <strong>object</strong><ul>
+<li>轉址後欲帶入的物件參數</li>
+<li>可在 Component 的 <strong>this.props.loaction.state</strong>找到傳入參數</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>replace : <strong>bool</strong><ul>
+<li>預設 <strong>false</strong></li>
+<li>設為 <strong>true</strong> 導向以<strong>新增 history stack</strong>方式進入記錄</li>
+<li>設為 <strong>false</strong> 導向以<strong>覆蓋 history stack</strong>方式進入記錄</li>
+</ul>
+</li>
+</ul>
+<h3 id="Switch"><a href="#Switch" class="headerlink" title="Switch"></a>Switch</h3><ul>
+<li><strong>Route</strong> 的集合</li>
+<li>只會 render <strong>第一個</strong> match到的 Route</li>
+<li>location : <strong>object</strong><ul>
+<li>可植入自定的 location </li>
+<li>會在 match 到時，放入指定的 Component 的 this.props</li>
+</ul>
+</li>
+<li>children : <strong>node</strong><ul>
+<li>放入Switch 管理的 Route or Redirect</li>
+<li>會繼承從 Switch 那邊的 <strong>location</strong><h3 id="history"><a href="#history" class="headerlink" title="history"></a>history</h3></li>
+</ul>
+</li>
+</ul>
+<h3 id="location"><a href="#location" class="headerlink" title="location"></a>location</h3><h3 id="match"><a href="#match" class="headerlink" title="match"></a>match</h3>
+      </div>
+      
+      
+      
+    </div>
+    
+
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#What"><span class="nav-number">1.</span> <span class="nav-text">What</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#How"><span class="nav-number">2.</span> <span class="nav-text">How</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Install"><span class="nav-number">2.1.</span> <span class="nav-text">Install</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic"><span class="nav-number">2.2.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Router"><span class="nav-number">2.2.1.</span> <span class="nav-text">Router</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#BrowserRouter"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">BrowserRouter</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HashRouter"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">HashRouter</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Route"><span class="nav-number">2.2.2.</span> <span class="nav-text">Route</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redirect"><span class="nav-number">2.2.3.</span> <span class="nav-text">Redirect</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Link"><span class="nav-number">2.2.4.</span> <span class="nav-text">Link</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Switch"><span class="nav-number">2.2.5.</span> <span class="nav-text">Switch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#history"><span class="nav-number">2.2.6.</span> <span class="nav-text">history</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#location"><span class="nav-number">2.2.7.</span> <span class="nav-text">location</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#match"><span class="nav-number">2.2.8.</span> <span class="nav-text">match</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Tony</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tony</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

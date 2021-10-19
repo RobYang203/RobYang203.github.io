@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://robyang203.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="at-rule 提供規則告訴 CSS 應該做什麼事  分 Regular Rules (常規規則) ＆ Nested Rules (巢狀規則)   1234567&#x2F;* Regular Rules *&#x2F;@[rule keyword] (rule)&#x2F;* Nested Rule *&#x2F;@[rule keyword] &amp;#123;    &#x2F;* Nested Statements *&#x2F;&amp;#125; Media">
+<meta property="og:type" content="website">
+<meta property="og:title" content="css-qlist">
+<meta property="og:url" content="https://robyang203.github.io/css-qlist/index.html">
+<meta property="og:site_name" content="Tony&#39;s Blog">
+<meta property="og:description" content="at-rule 提供規則告訴 CSS 應該做什麼事  分 Regular Rules (常規規則) ＆ Nested Rules (巢狀規則)   1234567&#x2F;* Regular Rules *&#x2F;@[rule keyword] (rule)&#x2F;* Nested Rule *&#x2F;@[rule keyword] &amp;#123;    &#x2F;* Nested Statements *&#x2F;&amp;#125; Media">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-04-13T10:30:40.000Z">
+<meta property="article:modified_time" content="2020-04-16T19:14:02.276Z">
+<meta property="article:author" content="Tony">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://robyang203.github.io/css-qlist/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: false,
+    isPage: true,
+    isArchive: false
+  };
+</script>
+
+  <title>css-qlist | Tony's Blog
+  </title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tony's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+  
+  
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+    
+    
+    
+    <div class="post-block" lang="en">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">css-qlist
+</h1>
+
+<div class="post-meta">
+  
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <h3 id="at-rule"><a href="#at-rule" class="headerlink" title="at-rule"></a>at-rule</h3><ul>
+<li><p>提供規則告訴 CSS 應該做什麼事</p>
+</li>
+<li><p>分 <code>Regular Rules (常規規則)</code> ＆ <code>Nested Rules (巢狀規則)</code></p>
+  <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Regular Rules */</span></span><br><span class="line">@[rule keyword] (rule)</span><br><span class="line"></span><br><span class="line">/* Nested Rule */</span><br><span class="line">@[rule keyword] &#123;</span><br><span class="line">    <span class="comment">/* Nested Statements */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Media-Queries"><a href="#Media-Queries" class="headerlink" title="Media Queries"></a>Media Queries</h4></li>
+<li><p>一種 <code>Nested Rules</code></p>
+</li>
+<li><p>開頭為 <code>@Media</code> </p>
+  <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@Media</span> (Media Fratures | Media Types) &#123;</span><br><span class="line">    <span class="comment">/* Style */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>Media Fratures</p>
+<ul>
+<li>針對裝置的一些特徵做判斷</li>
+<li>可量化的都可以加上 <code>min</code> | <code>max</code></li>
+<li>設定時需加上 <strong>()</strong></li>
+<li>分類<ul>
+<li>Viewport/Page Deminsions - 視窗或頁面尺寸<ul>
+<li>width - 寬</li>
+<li>height - 高</li>
+<li>orientation - 螢幕方位<ul>
+<li>portrait - 直向</li>
+<li>landscape 橫向</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Display Quality - 顯示品質<ul>
+<li>resolution</li>
+<li></li>
+</ul>
+</li>
+<li>Color - 顯示顏色<ul>
+<li>color - 判斷裝置顯示顏色 ， 0 為黑白</li>
+</ul>
+</li>
+<li>Interation - 互動模式<ul>
+<li>pointer - 判斷指標裝置 <ul>
+<li>none - 沒有</li>
+<li>coarse - 粗糙</li>
+<li>fine - 精準</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Media Types </p>
+<ul>
+<li>裝置判斷</li>
+<li>分類<ul>
+<li>all - 全部</li>
+<li>screen - 螢幕裝置</li>
+<li>print - 列印裝置(包含預覽列印看到的)</li>
+<li>speech - 朗讀裝置，針對可以「讀出」頁面的設備。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>邏輯判斷</p>
+<ul>
+<li>根據不同條件組成的判斷式</li>
+<li>分類<ul>
+<li>AND</li>
+<li>OR - 用 <code>,</code>表示</li>
+<li>NOT</li>
+<li>ONLY<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 判斷是螢幕裝置*/</span></span><br><span class="line"><span class="keyword">@media</span> screen &#123;</span><br><span class="line">    <span class="selector-tag">body</span>&#123;</span><br><span class="line">        <span class="attribute">background</span>: <span class="number">#c0c0c0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 判斷是螢幕裝置 和 寬最小要是 300px  或是 高最大是 500px*/</span></span><br><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">min-width:</span><span class="number">300px</span>) , (<span class="attribute">max-height:</span><span class="number">500px</span>)&#123;</span><br><span class="line">    <span class="selector-tag">body</span>&#123;</span><br><span class="line">        <span class="attribute">background</span>: <span class="number">#ff0000</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 判斷是不螢幕裝置*/</span></span><br><span class="line"><span class="keyword">@media</span> <span class="keyword">not</span> screen &#123;</span><br><span class="line">    <span class="selector-tag">body</span>&#123;</span><br><span class="line">        <span class="attribute">background</span>: <span class="number">#00ff00</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="css-的順序"><a href="#css-的順序" class="headerlink" title="css 的順序"></a>css 的順序</h3><h3 id="關於偽元素"><a href="#關於偽元素" class="headerlink" title="關於偽元素"></a>關於偽元素</h3><h3 id="關於符號"><a href="#關於符號" class="headerlink" title="關於符號 +"></a>關於符號 +</h3><h3 id="關於符號-gt"><a href="#關於符號-gt" class="headerlink" title="關於符號 &gt;"></a>關於符號 &gt;</h3><h3 id="關於赴號"><a href="#關於赴號" class="headerlink" title="關於赴號 ~"></a>關於赴號 ~</h3><h3 id="關於-view-port"><a href="#關於-view-port" class="headerlink" title="關於 view-port"></a>關於 view-port</h3>
+      </div>
+      
+      
+      
+    </div>
+    
+
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#at-rule"><span class="nav-number">1.</span> <span class="nav-text">at-rule</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Media-Queries"><span class="nav-number">1.1.</span> <span class="nav-text">Media Queries</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#css-的順序"><span class="nav-number">2.</span> <span class="nav-text">css 的順序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#關於偽元素"><span class="nav-number">3.</span> <span class="nav-text">關於偽元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#關於符號"><span class="nav-number">4.</span> <span class="nav-text">關於符號 +</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#關於符號-gt"><span class="nav-number">5.</span> <span class="nav-text">關於符號 &gt;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#關於赴號"><span class="nav-number">6.</span> <span class="nav-text">關於赴號 ~</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#關於-view-port"><span class="nav-number">7.</span> <span class="nav-text">關於 view-port</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Tony</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tony</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://robyang203.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Git 指令git init在指定資料夾初始化 git，建立 .git (隱藏的)資料夾  git status檢視目前 git資料夾的狀態，分為:      Changes to be commited: 以追蹤，待上傳檔案   Changes not staged for commit: 以追蹤檔案，但修改過   Untracked files: 尚未追蹤的檔案   額外指令:  -s:">
+<meta property="og:type" content="website">
+<meta property="og:title" content="git-command-note">
+<meta property="og:url" content="https://robyang203.github.io/git-command-note/index.html">
+<meta property="og:site_name" content="Tony&#39;s Blog">
+<meta property="og:description" content="Git 指令git init在指定資料夾初始化 git，建立 .git (隱藏的)資料夾  git status檢視目前 git資料夾的狀態，分為:      Changes to be commited: 以追蹤，待上傳檔案   Changes not staged for commit: 以追蹤檔案，但修改過   Untracked files: 尚未追蹤的檔案   額外指令:  -s:">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-05-01T16:16:49.000Z">
+<meta property="article:modified_time" content="2020-05-02T16:24:13.324Z">
+<meta property="article:author" content="Tony">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://robyang203.github.io/git-command-note/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: false,
+    isPage: true,
+    isArchive: false
+  };
+</script>
+
+  <title>git-command-note | Tony's Blog
+  </title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tony's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+  
+  
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+    
+    
+    
+    <div class="post-block" lang="en">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">git-command-note
+</h1>
+
+<div class="post-meta">
+  
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <h2 id="Git-指令"><a href="#Git-指令" class="headerlink" title="Git 指令"></a>Git 指令</h2><h4 id="git-init"><a href="#git-init" class="headerlink" title="git init"></a>git init</h4><p>在指定資料夾初始化 git，建立 .git (隱藏的)資料夾</p>
+<hr>
+<h4 id="git-status"><a href="#git-status" class="headerlink" title="git status"></a>git status</h4><p>檢視目前 git資料夾的狀態，分為:    </p>
+<ul>
+<li>Changes to be commited:<blockquote>
+<p>以追蹤，待上傳檔案</p>
+</blockquote>
+</li>
+<li>Changes not staged for commit:<blockquote>
+<p>以追蹤檔案，但修改過</p>
+</blockquote>
+</li>
+<li>Untracked files:<blockquote>
+<p>尚未追蹤的檔案</p>
+</blockquote>
+</li>
+<li>額外指令: <blockquote>
+<p>-s:</p>
+</blockquote>
+</li>
+<li>以一行來顯示目前每個檔案狀態<blockquote>
+<p>EX: </p>
+<blockquote>
+<p>AM UnTrackedFile.txt<br><br>PS. AM表示兩個區域範圍</p>
+</blockquote>
+</blockquote>
+</li>
+<li>左邊是 Stage(預存區)，右邊是 Working Directory<ul>
+<li>A = Add</li>
+<li>M = Modify</li>
+<li>? = UnTracked</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="git-add"><a href="#git-add" class="headerlink" title="git add"></a>git add</h4><p>把指定資料加入暫存區 EX: git add “file name”<br>指令: </p>
+<ul>
+<li>git add . : <blockquote>
+<p>把目前所在位置包含子目錄全加進暫存區</p>
+</blockquote>
+</li>
+<li>git add all :<blockquote>
+<p>把目前專案所有檔案加入暫存區</p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<h4 id="git-commit"><a href="#git-commit" class="headerlink" title="git commit"></a>git commit</h4><p>提交暫存區檔案，讓資料可以儲存讓git管理</p>
+<ul>
+<li>git commit -m “commit info”&lt;—-添加此次上傳註解</li>
+<li>無註解的話，會跑出編輯視窗叫你填寫<ul>
+<li>window:預設編輯器</li>
+<li>linux:vim</li>
+</ul>
+</li>
+<li>不需要註解:<br>  git commit –allow-empty -m “”</li>
+<li>額外指令:<ol>
+<li>-a:<br> 直接忽略git add，把所有檔案直接提交到 staging Area</li>
+<li>–amend<ol>
+<li>修改上一次的commit資料</li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h4 id="git-log"><a href="#git-log" class="headerlink" title="git log"></a>git log</h4><ul>
+<li>檢視提交紀錄</li>
+<li>會有的資訊:<ul>
+<li>commit編號(亂碼”Secure Hash Algorithm”)，假如目前 HEAD在這裡的話會顯示(HEAD -&gt; master)</li>
+<li>Author 作者(E-mail)</li>
+<li>日期</li>
+<li>註解</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>額外指令:</p>
+<ul>
+<li><p>–oneline 把每筆資料，以一行來顯示</p>
+<blockquote>
+<p>commit編號(7-8碼) HEAD是否在這 註解&#60;br&gt;<br>f9a2f8d (HEAD -&gt; master) Test Commit 20181105_12:35</p>
+</blockquote>
+</li>
+<li><p>–graph 把目前commit的資料以樹狀圖表示</p>
+</li>
+<li><p>–author=”name” 尋找作者</p>
+</li>
+<li><p>–grep=”XXX” 尋找commit的註解裡包含的字</p>
+</li>
+<li><p>-S=”關鍵字” 尋找檔案內容裡包含關鍵字</p>
+</li>
+<li><p>–since –until 查詢時間內的檔案，從日期~時間</p>
+</li>
+<li><p>–after –before 同上</p>
+</li>
+<li><p>-p or –patch</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">顯示每次 commit 的跟上一次commit的差別 &amp; 修改的內容 ，</span><br><span class="line">後面會顯示 diff的內容，</span><br><span class="line">可以多加 -p -數量，</span><br><span class="line">決定要顯示幾筆，沒加就是全部</span><br></pre></td></tr></table></figure></li>
+<li><p>–stat</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">在顯示每筆commit的最後都會有修改的統計</span><br><span class="line">commit ca82a6dff817ec66f44342007202690a93763949 (HEAD -&gt; master, origin&#x2F;master,origin&#x2F;HEAD)</span><br><span class="line">Author: Scott Chacon &lt;schacon@gmail.com&gt;</span><br><span class="line">Date:   Mon Mar 17 21:52:11 2008 -0700</span><br><span class="line"></span><br><span class="line">    changed the verison number					&lt;---備註</span><br><span class="line"></span><br><span class="line">    Rakefile | 2 +-								&lt;---修改的檔案以及修改動作 +是增加 -是減少</span><br><span class="line">    1 file changed, 1 insertion(+), 1 deletion(-)  &lt;---統計</span><br></pre></td></tr></table></figure></li>
+<li><p>–pretty</p>
+<blockquote>
+<p>更換顯示紀錄格式</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">EX:</span><br><span class="line">--pretty&#x3D;oneline</span><br><span class="line">    以一行解決一筆顯示</span><br><span class="line">--pretty&#x3D;format:&quot;%h - %an, %ar : %s&quot; (Commit hash)-(Author name),(Author date, relative):(Subject)</span><br><span class="line">    自訂顯示格式</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="git-rm"><a href="#git-rm" class="headerlink" title="git rm"></a>git rm</h4><p>刪除在管檔案</p>
+<ul>
+<li>已有下指令 <strong>EX: add or modified</strong> 尚未commit必須先做完，否則會出現 error<ul>
+<li>error: the following file has changes staged in the index:</li>
+<li>error: the following file has local modifications:</li>
+</ul>
+</li>
+<li>未託管(Untracked)檔案無法用此指令，否則會出現 error<ul>
+<li>fatal: pathspec ‘UnTrackedFile.txt’ did not match any files</li>
+</ul>
+</li>
+<li>刪除在 git status會顯示 <strong>deleted:    FileName</strong><blockquote>
+<p>並非未刪除，是還沒commit做好這次的紀錄</p>
+</blockquote>
+</li>
+<li>額外指令:<ul>
+<li>–cached<blockquote>
+<p>在暫存區時，退回託管狀態，變成未託管(Untracked)<br>PS. 此命令無法影響到儲存庫(Repository)</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="git-diff"><a href="#git-diff" class="headerlink" title="git diff"></a>git diff</h4><p>判斷被託管的檔案差異性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">L:\Git_Work\Git_Test_20181102&gt;git diff</span><br><span class="line">diff --git a&#x2F;UnTrackedFile.txt b&#x2F;UnTrackedFile.txt</span><br><span class="line">index 65ff6f9..3b01642 100644</span><br><span class="line">--- a&#x2F;UnTrackedFile.txt &lt;--原本</span><br><span class="line">+++ b&#x2F;UnTrackedFile.txt &lt;---修改</span><br><span class="line">@@ -1,3 +1,2 @@</span><br></pre></td></tr></table></figure>
+<ul>
+<li>當檔案被修改後，被修改的檔案會被移到 Modified，並且保留原本檔案在 staged</li>
+<li>此指令就是會去判斷這兩個檔案的內容差異</li>
+<li>兩個數字為一組 - 為舊檔 +為新檔</li>
+<li>數字是變化起始跟結尾 <ul>
+<li><code>-1,3</code> 就是 舊檔 第1行 - 第3行</li>
+<li><code>+1,2</code> 就是 新檔 第1行 - 第2行</li>
+</ul>
+</li>
+<li>額外指令:<ul>
+<li>–staged</li>
+<li>–cached<ul>
+<li>會比較上次 commit的檔案跟 目前在 staged的檔案</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="git-mv"><a href="#git-mv" class="headerlink" title="git mv"></a>git mv</h4><ul>
+<li>移動檔案 or 重新命名<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">EX:</span><br><span class="line">    git mv FileName NewFileName&lt;---重新命名</span><br><span class="line">    git mv FileName NewAddress&#x2F;FileName &lt;---移動</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<hr>
+<h4 id="git-reset-60-commit-id-gt"><a href="#git-reset-60-commit-id-gt" class="headerlink" title="git reset &#60;commit id&gt;"></a>git reset &#60;commit id&gt;</h4><p>退回之前的狀態 or 版本</p>
+<ul>
+<li>作用於單獨檔案 –&gt; 退回指定檔案 ，狀態變至(UnTracked)<br>限定在 Working tree，當下的 commit</li>
+<li>作用於版本 <ul>
+<li>–SOFT &lt;指定版本&gt;<blockquote>
+<p>退到 added</p>
+</blockquote>
+</li>
+<li>–MIXED &lt;指定版本&gt;<blockquote>
+<p>退到 UnTracked</p>
+</blockquote>
+</li>
+<li>–HARD &lt;指定版本&gt;<blockquote>
+<p>檔案完全恢復成指定版本</p>
+</blockquote>
+</li>
+<li>沒有指令<blockquote>
+<p>退回到指定 commit id commit 後的狀態</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="git-checkout-–-60-file-name-gt-gt"><a href="#git-checkout-–-60-file-name-gt-gt" class="headerlink" title="git checkout – &#60;file name&gt;&gt;"></a>git checkout – &#60;file name&gt;&gt;</h4><p>Modified 的檔案還原尚未 Modify 時</p>
+<hr>
+<h4 id="git-clone-60-url-gt-60-specified-dir-gt"><a href="#git-clone-60-url-gt-60-specified-dir-gt" class="headerlink" title="git clone &#60;url&gt; &#60;specified dir&gt;"></a>git clone &#60;url&gt; &#60;specified dir&gt;</h4><p>會複製一份指定的 repository 最新的檔案下來到指定資料夾<code>(包含 .git)</code></p>
+<hr>
+<h4 id="git-remote"><a href="#git-remote" class="headerlink" title="git remote"></a>git remote</h4><p>連接指定的 repository  遠端管理</p>
+<ul>
+<li>add &#60; shortname &gt; &#60; url &gt;<blockquote>
+<p>加入指定的 url 至本地的 repository shortname是此 url的簡稱</p>
+</blockquote>
+</li>
+<li>show &#60;shortname&gt;<blockquote>
+<p>顯示指定的 remote 資訊</p>
+</blockquote>
+</li>
+<li>額外指令:<ul>
+<li>-v<blockquote>
+<p>顯示目前有加入多少 remote url</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="git-fetch-60-remote-shortname-gt-60-branch-name-gt-60-local-new-create-branch-gt"><a href="#git-fetch-60-remote-shortname-gt-60-branch-name-gt-60-local-new-create-branch-gt" class="headerlink" title="git fetch &#60;remote shortname&gt; &#60;branch name&gt; :&#60;local new create branch&gt;"></a>git fetch &#60;remote shortname&gt; &#60;branch name&gt; :&#60;local new create branch&gt;</h4><p>把遠端資料同步到本機上，並在現有的 Commit 新開一條分支 origin/master</p>
+<ul>
+<li>remote shortname<blockquote>
+<p>在 remote 上建立的 遠端簡稱</p>
+</blockquote>
+</li>
+<li>branch name<blockquote>
+<p>在遠端欲要下載下來的分支</p>
+</blockquote>
+</li>
+<li>local new create branch<blockquote>
+<p>下載到指定分支</p>
+</blockquote>
+</li>
+<li>沒有參數以 origin/master 為基準</li>
+<li>載下來不會做 merge，所以 HEAD 跟 FETCH_HEAD 不會同步</li>
+</ul>
+<hr>
+<h4 id="git-pull-60-remote-shortname-gt-60-branch-name-gt-60-local-new-create-branch-gt"><a href="#git-pull-60-remote-shortname-gt-60-branch-name-gt-60-local-new-create-branch-gt" class="headerlink" title="git pull &#60;remote shortname&gt; &#60;branch name&gt; :&#60;local new create branch&gt;"></a>git pull &#60;remote shortname&gt; &#60;branch name&gt; :&#60;local new create branch&gt;</h4><p>把遠端資料同步到本機上，資料直接合併為一條 branch</p>
+<ul>
+<li>同 fetch</li>
+<li>載下來自動做 merge，所以 HEAD 跟 FETCH_HEAD 會同步</li>
+</ul>
+<hr>
+<h4 id="git-push-60-remote-shortname-gt-60-branch-name-gt"><a href="#git-push-60-remote-shortname-gt-60-branch-name-gt" class="headerlink" title="git push  &#60;remote shortname&gt; &#60;branch name&gt;"></a>git push  &#60;remote shortname&gt; &#60;branch name&gt;</h4><p>把本機上的資料推送到遠端上</p>
+<hr>
+<h4 id="git-branch"><a href="#git-branch" class="headerlink" title="git branch"></a>git branch</h4><p>分支管理</p>
+<ul>
+<li>不帶參數，會顯示目前有多少的 branch</li>
+<li>參數<ul>
+<li>git branch &#60;branch name&gt;<blockquote>
+<p>新建</p>
+</blockquote>
+</li>
+<li>git branch -m &#60;origin branch name&gt; &#60;change branch name&gt;<blockquote>
+<p>改名</p>
+</blockquote>
+</li>
+<li>git branch -d &#60;branch name&gt;<blockquote>
+<p>刪除，當未合併時，會提醒說未合併，禁止刪除            </p>
+</blockquote>
+</li>
+<li>git branch -D &#60;branch name&gt;<blockquote>
+<p>強制刪除</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="git-checkout-60-branch-name-gt"><a href="#git-checkout-60-branch-name-gt" class="headerlink" title="git checkout &#60;branch name&gt;"></a>git checkout &#60;branch name&gt;</h4><ul>
+<li>切換分支</li>
+<li>沒有指定分支時，切過去會有錯誤</li>
+<li>參數<ul>
+<li>git checkout -b &#60;branch name&gt;<blockquote>
+<p>判斷有無此分支，沒有會新建再切過去</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="git-gc"><a href="#git-gc" class="headerlink" title="git gc"></a>git gc</h4><p>處理掉不需要的資源</p>
+<hr>
+
+      </div>
+      
+      
+      
+    </div>
+    
+
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Git-指令"><span class="nav-number">1.</span> <span class="nav-text">Git 指令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#git-init"><span class="nav-number">1.0.1.</span> <span class="nav-text">git init</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#git-status"><span class="nav-number">1.0.2.</span> <span class="nav-text">git status</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#git-add"><span class="nav-number">1.0.3.</span> <span class="nav-text">git add</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#git-commit"><span class="nav-number">1.0.4.</span> <span class="nav-text">git commit</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#git-log"><span class="nav-number">1.0.5.</span> <span class="nav-text">git log</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#git-rm"><span class="nav-number">1.0.6.</span> <span class="nav-text">git rm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#git-diff"><span class="nav-number">1.0.7.</span> <span class="nav-text">git diff</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#git-mv"><span class="nav-number">1.0.8.</span> <span class="nav-text">git mv</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#git-reset-60-commit-id-gt"><span class="nav-number">1.0.9.</span> <span class="nav-text">git reset &amp;#60;commit id&gt;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#git-checkout-–-60-file-name-gt-gt"><span class="nav-number">1.0.10.</span> <span class="nav-text">git checkout – &amp;#60;file name&gt;&gt;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#git-clone-60-url-gt-60-specified-dir-gt"><span class="nav-number">1.0.11.</span> <span class="nav-text">git clone &amp;#60;url&gt; &amp;#60;specified dir&gt;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#git-remote"><span class="nav-number">1.0.12.</span> <span class="nav-text">git remote</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#git-fetch-60-remote-shortname-gt-60-branch-name-gt-60-local-new-create-branch-gt"><span class="nav-number">1.0.13.</span> <span class="nav-text">git fetch &amp;#60;remote shortname&gt; &amp;#60;branch name&gt; :&amp;#60;local new create branch&gt;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#git-pull-60-remote-shortname-gt-60-branch-name-gt-60-local-new-create-branch-gt"><span class="nav-number">1.0.14.</span> <span class="nav-text">git pull &amp;#60;remote shortname&gt; &amp;#60;branch name&gt; :&amp;#60;local new create branch&gt;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#git-push-60-remote-shortname-gt-60-branch-name-gt"><span class="nav-number">1.0.15.</span> <span class="nav-text">git push  &amp;#60;remote shortname&gt; &amp;#60;branch name&gt;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#git-branch"><span class="nav-number">1.0.16.</span> <span class="nav-text">git branch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#git-checkout-60-branch-name-gt"><span class="nav-number">1.0.17.</span> <span class="nav-text">git checkout &amp;#60;branch name&gt;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#git-gc"><span class="nav-number">1.0.18.</span> <span class="nav-text">git gc</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Tony</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tony</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

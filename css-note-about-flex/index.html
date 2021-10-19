@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://robyang203.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Flex簡介是一種 css 針對頁面排版的一種方法 ，分為外部容器(container) &amp; 內部元件(items) 兩方面的設定 外部容器 Container外部容器負責的是內部元件的排列方式以及方向 ， 根據 flex  模型圖來看會有幾個參考點分兩大類別：  main axis根據 flex 方向來決定 cross axis跟 main axis 為垂直的軸  每個類別包含有：  s">
+<meta property="og:type" content="website">
+<meta property="og:title" content="css-note&#x2F;about-flex">
+<meta property="og:url" content="https://robyang203.github.io/css-note-about-flex/index.html">
+<meta property="og:site_name" content="Tony&#39;s Blog">
+<meta property="og:description" content="Flex簡介是一種 css 針對頁面排版的一種方法 ，分為外部容器(container) &amp; 內部元件(items) 兩方面的設定 外部容器 Container外部容器負責的是內部元件的排列方式以及方向 ， 根據 flex  模型圖來看會有幾個參考點分兩大類別：  main axis根據 flex 方向來決定 cross axis跟 main axis 為垂直的軸  每個類別包含有：  s">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://robyang203.github.io/css-note-about-flex/assets/flexModule.png">
+<meta property="article:published_time" content="2021-04-21T06:22:27.000Z">
+<meta property="article:modified_time" content="2021-04-22T06:34:22.374Z">
+<meta property="article:author" content="Tony">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://robyang203.github.io/css-note-about-flex/assets/flexModule.png">
+
+<link rel="canonical" href="https://robyang203.github.io/css-note-about-flex/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: false,
+    isPage: true,
+    isArchive: false
+  };
+</script>
+
+  <title>css-note/about-flex | Tony's Blog
+  </title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tony's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+  
+  
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+    
+    
+    
+    <div class="post-block" lang="en">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">css-note/about-flex
+</h1>
+
+<div class="post-meta">
+  
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <h1 id="Flex"><a href="#Flex" class="headerlink" title="Flex"></a>Flex</h1><h2 id="簡介"><a href="#簡介" class="headerlink" title="簡介"></a>簡介</h2><p>是一種 css 針對頁面排版的一種方法 ，<br>分為<code>外部容器(container)</code> &amp; <code>內部元件(items)</code> 兩方面的設定</p>
+<h3 id="外部容器-Container"><a href="#外部容器-Container" class="headerlink" title="外部容器 Container"></a>外部容器 Container</h3><p>外部容器負責的是內部元件的排列方式以及方向 ，</p>
+<p>根據 flex  模型圖來看會有幾個參考點<br><img src="./assets/flexModule.png" alt="flexModule"><br>分兩大類別：</p>
+<ul>
+<li>main axis<br>根據 flex 方向來決定</li>
+<li>cross axis<br>跟 <code>main axis</code> 為垂直的軸</li>
+</ul>
+<p>每個類別包含有：</p>
+<ul>
+<li>start<br>此軸的啟始</li>
+<li>end<br>此軸的結束</li>
+<li>size<br>此軸的長度</li>
+</ul>
+<h4 id="相關設定："><a href="#相關設定：" class="headerlink" title="相關設定："></a>相關設定：</h4><ul>
+<li>flex-direction<br>設定 item 排列方向，並決定好上述的參考點，分別為：<ul>
+<li>row<br>橫向排列，以左至右</li>
+<li>column<br>縱向排列，以上至下</li>
+<li>row-reverse<br>橫向排列，以右至左</li>
+<li>column-reverse<br>縱向排列，以下至上</li>
+</ul>
+</li>
+<li>flex-wrap<br>設定內容物件是否需要換行，其相關設定為：<ul>
+<li>nowarp<br>預設，單行顯示</li>
+<li>wrap<br>總長度超出設定寬度就換行</li>
+<li>wrap-reverse<br>反轉排序</li>
+</ul>
+</li>
+<li>justify-content<br>以 <code>main axis</code> 為基準來對齊，分別為：<ul>
+<li>flex-start<br>以 <code>main start</code> 對齊</li>
+<li>flex-end<br>以 <code>main end</code> 對齊</li>
+<li>center<br>以 <code>main axis</code>中間 對齊</li>
+<li>space-between<br>平均分配 <code>main size</code> 空間， 第一個 ＆ 最後一個 item 對齊 start &amp; end</li>
+<li>space-around<br>平均分配 <code>main size</code> 空間</li>
+</ul>
+</li>
+<li>align-items<br>是以<strong>單行</strong>為單位處理，以 <code>cross axis</code> 為基準來對齊，分別為：<ul>
+<li>flex-start<br>以 <code>cross start</code> 對齊</li>
+<li>flex-end<br>以 <code>cross end</code> 對齊</li>
+<li>center<br>以 <code>cross axis</code>中間 對齊</li>
+<li>stretch<br>如 item 尚未設定長度，強制拉伸 item 至 <code>cross size</code> 同等長度</li>
+<li>baseline<br>以 item 的 baseline 為基準做對齊</li>
+</ul>
+</li>
+<li>align-content<br>是根據<strong>全部內容</strong>處理，以 <code>cross axis</code> 為基準來對齊，分別為：<ul>
+<li>flex-start<br>以 <code>cross start</code> 對齊</li>
+<li>flex-end<br>以 <code>cross end</code> 對齊</li>
+<li>center<br>以 <code>cross axis</code>中間 對齊</li>
+<li>stretch<br>如 item 尚未設定長度，強制拉伸 item 至 <code>cross size</code> 同等長度</li>
+<li>baseline<br>以 item 的 baseline 為基準做對齊</li>
+<li>space-between<br>平均分配 <code>cross size</code> 空間，  第一個 ＆ 最後一個  item 對齊 start &amp; end</li>
+<li>space-around<br>平均分配 <code>cross size</code> 空間</li>
+</ul>
+</li>
+</ul>
+<h4 id="align-content-vs-align-items"><a href="#align-content-vs-align-items" class="headerlink" title="align-content vs align-items"></a>align-content vs align-items</h4><h3 id="內部元件-Items"><a href="#內部元件-Items" class="headerlink" title="內部元件 Items"></a>內部元件 Items</h3><p>針對元件本身內部空間相關的設定</p>
+<h4 id="相關設定：-1"><a href="#相關設定：-1" class="headerlink" title="相關設定："></a>相關設定：</h4><ul>
+<li>flex : [grow]  [shrink]   [basis] <ul>
+<li>flex-grow<br>在外部容器尚有空間時，依據數值擴展元件大小，0 為不啟用，皆以整數設定</li>
+<li>flex-shrink<br>在外部容器空間不夠時，依據數值縮減元件大小，0 為不啟用，皆以整數設定</li>
+<li>flex-basis<br>此元件基礎長度，可套用不同單位(px、%、em …etc)</li>
+</ul>
+</li>
+<li>order<br>調整元件順序，數字越小越靠前</li>
+<li>algin-self<br>單獨對元件設定，跟<strong>align-items</strong>一樣的設定</li>
+</ul>
+
+      </div>
+      
+      
+      
+    </div>
+    
+
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Flex"><span class="nav-number">1.</span> <span class="nav-text">Flex</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#簡介"><span class="nav-number">1.1.</span> <span class="nav-text">簡介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#外部容器-Container"><span class="nav-number">1.1.1.</span> <span class="nav-text">外部容器 Container</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#相關設定："><span class="nav-number">1.1.1.1.</span> <span class="nav-text">相關設定：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#align-content-vs-align-items"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">align-content vs align-items</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#內部元件-Items"><span class="nav-number">1.1.2.</span> <span class="nav-text">內部元件 Items</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#相關設定：-1"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">相關設定：</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Tony</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tony</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

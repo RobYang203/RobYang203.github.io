@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://robyang203.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Git 作業流程 Git就是一個大倉庫，它為每個專案去建立一個倉庫， 把每次提交過的訊息儲存起來，當有需要的時候可以提取處來做更改建立新版本 大致分類: 工作區(Working Directory): 已建立git 資料夾(git init) 尚未做任何git動作的區塊 當 git add “file name”指定檔案將會被送進暫存區   暫存區(Staging Area): 別稱 index，">
+<meta property="og:type" content="website">
+<meta property="og:title" content="git-note">
+<meta property="og:url" content="https://robyang203.github.io/git-note/index.html">
+<meta property="og:site_name" content="Tony&#39;s Blog">
+<meta property="og:description" content="Git 作業流程 Git就是一個大倉庫，它為每個專案去建立一個倉庫， 把每次提交過的訊息儲存起來，當有需要的時候可以提取處來做更改建立新版本 大致分類: 工作區(Working Directory): 已建立git 資料夾(git init) 尚未做任何git動作的區塊 當 git add “file name”指定檔案將會被送進暫存區   暫存區(Staging Area): 別稱 index，">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-05-01T16:17:01.000Z">
+<meta property="article:modified_time" content="2020-05-01T17:36:33.193Z">
+<meta property="article:author" content="Tony">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://robyang203.github.io/git-note/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: false,
+    isPage: true,
+    isArchive: false
+  };
+</script>
+
+  <title>git-note | Tony's Blog
+  </title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tony's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+  
+  
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+    
+    
+    
+    <div class="post-block" lang="en">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">git-note
+</h1>
+
+<div class="post-meta">
+  
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <h4 id="Git-作業流程"><a href="#Git-作業流程" class="headerlink" title="Git 作業流程"></a>Git 作業流程</h4><ul>
+<li>Git就是一個大倉庫，它為每個專案去建立一個倉庫，</li>
+<li>把每次提交過的訊息儲存起來，當有需要的時候可以提取處來做更改建立新版本</li>
+<li>大致分類:<ul>
+<li>工作區(Working Directory):<ul>
+<li>已建立git 資料夾(git init)</li>
+<li>尚未做任何git動作的區塊</li>
+<li>當 git add “file name”指定檔案將會被送進暫存區</li>
+</ul>
+</li>
+<li>暫存區(Staging Area):<ul>
+<li>別稱 index，通常會放置在 .git/index裡</li>
+<li>當 git add 後，會進入到此區</li>
+<li>在提交(commit)之前，所屬版本都是同一個</li>
+<li>此區不會因為”工作區”修改而改動，但是會去判別是否有改動過(use “git status”)</li>
+<li>此區的改動不會去影響已經提交(commit)過的檔案</li>
+<li>當在此區的檔案同樣會有一份在儲存庫(“Repository”)裡，其目的，是代表此儲存區在”可提領”(git reset)狀態，可供編輯</li>
+<li>在提交(commit)之後，此區檔案將被清空，儲存庫的區域將被封裝，打開下一個可用區域</li>
+</ul>
+</li>
+<li>儲存庫(Repository):<ul>
+<li>保存每一次提交過的代碼</li>
+<li>提交一次，就是一個版本</li>
+<li>版本不會被複寫，就算提取(reset)比較早的版本，提交(commit)之後，還是會建立新的版本</li>
+<li>此區以樹狀型式來做儲存分為 “master”、”branch”</li>
+</ul>
+</li>
+<li>HEAD:<ul>
+<li>指標類的物件，用來指向目前在那個版本儲存區(分支)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="–since-–until-、–after-–before-差在哪"><a href="#–since-–until-、–after-–before-差在哪" class="headerlink" title="–since –until 、–after –before  差在哪?"></a>–since –until 、–after –before  差在哪?</h4><p>查了資料，沒有特別去解釋這部分，好像就是一樣的，既然這樣，為何要多這部分出來<br>是因為可以讓查詢變得更細麼?</p>
+<hr>
+<h4 id="何謂CVCS"><a href="#何謂CVCS" class="headerlink" title="何謂CVCS"></a>何謂CVCS</h4><p><strong>Centralized Version Control Sysyem</strong> 集中式版控(版本控制)管理系統<br><br>把每個版本資料集中在一台 Server上，讓用戶去通過這台 Server去查看</p>
+<hr>
+<h4 id="何謂DVCS"><a href="#何謂DVCS" class="headerlink" title="何謂DVCS"></a>何謂DVCS</h4><p><strong>Distributed Version Control System</strong>分散式版控管理系統<br>每個 client 都會 clone Server ，把資料從Server 複製一份到本地端<br><br>當 主Server 有問題時，可以藉由 client端的 clone Server 來恢復 Server資料</p>
+<hr>
+<h4 id="Git-儲存方式"><a href="#Git-儲存方式" class="headerlink" title="Git 儲存方式"></a>Git 儲存方式</h4><p>在專案裡， Commit(Version 1) ，執行快照(SnapShot)，<br><br>就像是拍照一樣，去記錄當前檔案的資訊，<br><br>而當下一次的 Commit(Version 2)，執行快照(SnapShot)，<br><br>這時會去判斷 Version 1 裡的檔案是否有被變動過，<br><br>有，進行 Version 2 的快照，<br><br>無，留下 Version 1 快照連結，<br><br>當抓取 Version 2，會透過此連結去抓取 Version 1 的檔案資訊</p>
+<hr>
+<h4 id="Git-的-三態三域"><a href="#Git-的-三態三域" class="headerlink" title="Git 的 三態三域"></a>Git 的 三態三域</h4><ul>
+<li>三態， 三種狀態 committed(已提交) 、 modified(已修改) 、 staged(已預存)</li>
+<li>三域 ， 三個區域對應三種狀態<ul>
+<li>預存區(staging area) - staged:<ul>
+<li>又稱index</li>
+<li>是一個資訊檔，專們記錄下一次要commit的檔案資訊</li>
+</ul>
+</li>
+<li>工作目錄(working area) - modified :<ul>
+<li>是從 Git Directory 裡克隆(clone)某一版出來到硬碟裡，目的是要來做修改編輯用的</li>
+</ul>
+</li>
+<li>Git 資料夾(Git Directory) - committed:<ul>
+<li>commit 後會把資料檔案放入的位置</li>
+<li>放入後將不會再被修改，成為此專案的一個版本</li>
+<li>可以提取但只會用複製的方式去做，並不會改動到資料夾裡的版本</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="Git-工具"><a href="#Git-工具" class="headerlink" title="Git 工具"></a>Git 工具</h4><ul>
+<li>git config<br>  設定一些組態變數的的地方，這些會儲存到三個地方<ul>
+<li>/etc/gitconfig<ul>
+<li>這裡包含 User 以及 respositores 的資料設定，</li>
+<li>如果輸入 git config –system ，設定就會儲存到這裡</li>
+<li>因為它是系統設定，需要有管理者的權限</li>
+</ul>
+</li>
+<li>~/.gitconfig or ~/.config/git/config<ul>
+<li>這裡是個人化設定，</li>
+<li>只會影響到 user 本身， </li>
+<li>輸入 git config –global ，</li>
+<li>影響到關於此 User 的所有 respositores</li>
+</ul>
+</li>
+<li>config(.git/config)<ul>
+<li>這設定是預設選項，放在 Git Directory </li>
+<li>輸入 git config –local  </li>
+<li>可強制讀寫當前的設定</li>
+<li>會影響到的是目前正在使用的 repositore </li>
+</ul>
+</li>
+<li>由上往下，後來者覆蓋前面的設定，所以優先設定會是 “config”</li>
+<li>在Windows 這三部分分別儲存在<ul>
+<li>.gitconfig<br> C:\Users\UserName</li>
+<li>/etc/gitconfig<br> 在 window vista以上 ，則會在  C:\ProgramData\Git</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="Git-Status"><a href="#Git-Status" class="headerlink" title="Git Status"></a>Git Status</h4><p>在Git 的目錄裡，會先判斷兩種狀態</p>
+<ul>
+<li>Untracked<ul>
+<li>在新加入 or 被移除的 檔案，狀態都是 Untracked，代表目前此檔案不被Git所管，被編輯、移除，Git 都不會偵測到</li>
+<li>也無法復原 Untracked 的檔案</li>
+</ul>
+</li>
+<li>Tracked<br>  被追蹤中的檔案，會去偵測此檔案目前的狀態，一共有三種狀態<ul>
+<li>Unmodified<ul>
+<li>此狀態通常會是在，commit 之後，Tracked 的檔案，直接歸到 Unmodified<br></li>
+<li>從別的 server 上 clone過來的檔案，一開始也會是 Unmodified<br></li>
+</ul>
+</li>
+<li>Modified<ul>
+<li>只要尚未 commit ，並且在 Tracked 狀態裡，只要改動過檔案，就會被劃分到 Modified</li>
+<li>但改動過的檔案會有一份改動之前的版本留在 Statged</li>
+<li>如果沒有在重新”git add”，commit的版本會是改動之前的檔案</li>
+</ul>
+</li>
+<li>Staged <ul>
+<li>此狀態代表尚未 commit ，是下一次 commit的預備區</li>
+<li>Untracked 轉移到  Tracked 會直接劃分此區</li>
+<li>Modified 的檔案需要重新轉移到這裡，否則 commit的檔案會是修改前的檔案<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">打個比方，每一次 commit 都是一集連續劇的其中之一的場景， staged 是舞台 、file 是演員，</span><br><span class="line">演員要開演上舞台，所以要 (add)，把演員(file)推上舞台，</span><br><span class="line">但因應不同的需求，演員需要換服裝，所以下場換(Modified)，</span><br><span class="line">再上場(add)，當這幕結束時，卡(commit)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="甚麼是-origin-master-origin-HEAD"><a href="#甚麼是-origin-master-origin-HEAD" class="headerlink" title="甚麼是 origin/master , origin/HEAD"></a>甚麼是 origin/master , origin/HEAD</h4><ul>
+<li>origin :<blockquote>
+<p>遠端名，在 remote時會建立，假如 remote時不戴 shortname，就會預設 origin</p>
+</blockquote>
+</li>
+<li>master:<blockquote>
+<p>branch 名，通常在 init 時，就會建一個 master 的 branch</p>
+</blockquote>
+</li>
+<li>HEAD:<blockquote>
+<p>當前已 commit 的指針</p>
+</blockquote>
+</li>
+<li>幾個和起來的意思就是，<ul>
+<li>origin/master<ul>
+<li>遠端的 master branch</li>
+</ul>
+</li>
+<li>origin/HEAD<ul>
+<li>遠端當前 commit <h4 id="關於-遠端同步"><a href="#關於-遠端同步" class="headerlink" title="關於 遠端同步"></a>關於 遠端同步</h4></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>把本地資料送到 指定的 遠端 git repo<ul>
+<li>未同步前<ul>
+<li>本地 HEAD 高於 FETCH_HEAD</li>
+</ul>
+</li>
+<li>HEAD 同步<ul>
+<li>git merge FETCH_HEAD</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>把遠端資料 同步回本地<ul>
+<li>git fetch &#60;remote shortname&#62;<ul>
+<li>將遠端資料拉回本地</li>
+<li>資料尚未同步，此時遠端  FETCH_HEAD 高於 HEAD        </li>
+</ul>
+</li>
+<li>HEAD 同步<ul>
+<li>git merge FETCH_HEAD</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="關於-FETCH-HEAD-amp-HEAD"><a href="#關於-FETCH-HEAD-amp-HEAD" class="headerlink" title="關於 FETCH_HEAD &amp; HEAD"></a>關於 FETCH_HEAD &amp; HEAD</h4><ul>
+<li>FETCH_HEAD<ul>
+<li>遠端 repo 的指針</li>
+<li>判斷目前位在哪個 遠端的 branch</li>
+</ul>
+</li>
+<li>HEAD<ul>
+<li>本地 repo 的指針</li>
+<li>判斷目前位在哪個 本地的 branch</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>PS.  不是下載後，就算本地，而是要經過 merge 才會讓資料進入本地的 repo</p>
+</blockquote>
+<hr>
+<h4 id="Err"><a href="#Err" class="headerlink" title="Err"></a>Err</h4><ul>
+<li>warning: LF will be replaced by CRLF<ul>
+<li>原因:<blockquote>
+<p>因為 Window 的換行符號是 CRLF， git add 時，會去轉換成 LF，在提出(checkout)時，轉回 CRLF<br>PS. 不希望 checkout時轉換的話，<strong>git config –global core.autocrlf input</strong>(預設為 true)</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>PS. CRLF：ASCII 13, \r\n 進行換行，對於 git 中浪費了更多的字元組成換行<br>    LF：ASCII 10, \n 僅為換行符號</p>
+</blockquote>
+
+      </div>
+      
+      
+      
+    </div>
+    
+
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Git-作業流程"><span class="nav-number">1.</span> <span class="nav-text">Git 作業流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#–since-–until-、–after-–before-差在哪"><span class="nav-number">2.</span> <span class="nav-text">–since –until 、–after –before  差在哪?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#何謂CVCS"><span class="nav-number">3.</span> <span class="nav-text">何謂CVCS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#何謂DVCS"><span class="nav-number">4.</span> <span class="nav-text">何謂DVCS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Git-儲存方式"><span class="nav-number">5.</span> <span class="nav-text">Git 儲存方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Git-的-三態三域"><span class="nav-number">6.</span> <span class="nav-text">Git 的 三態三域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Git-工具"><span class="nav-number">7.</span> <span class="nav-text">Git 工具</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Git-Status"><span class="nav-number">8.</span> <span class="nav-text">Git Status</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#甚麼是-origin-master-origin-HEAD"><span class="nav-number">9.</span> <span class="nav-text">甚麼是 origin&#x2F;master , origin&#x2F;HEAD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#關於-遠端同步"><span class="nav-number">10.</span> <span class="nav-text">關於 遠端同步</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#關於-FETCH-HEAD-amp-HEAD"><span class="nav-number">11.</span> <span class="nav-text">關於 FETCH_HEAD &amp; HEAD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Err"><span class="nav-number">12.</span> <span class="nav-text">Err</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Tony</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tony</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
