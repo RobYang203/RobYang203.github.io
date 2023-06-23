@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://robyang203.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="React 設定下載套件 dev 環境  @babel&#x2F;core babel 核心 api   @babel&#x2F;preset-env 轉譯 es2015   @babel&#x2F;preset-react 轉譯 jsx   babel-loader babel 轉譯工具   @babel&#x2F;plugin-proposal-class-properties babel-plugin-transform-cla">
+<meta property="og:type" content="website">
+<meta property="og:title" content="react_setting">
+<meta property="og:url" content="https://robyang203.github.io/react-setting/index.html">
+<meta property="og:site_name" content="Tony&#39;s Blog">
+<meta property="og:description" content="React 設定下載套件 dev 環境  @babel&#x2F;core babel 核心 api   @babel&#x2F;preset-env 轉譯 es2015   @babel&#x2F;preset-react 轉譯 jsx   babel-loader babel 轉譯工具   @babel&#x2F;plugin-proposal-class-properties babel-plugin-transform-cla">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-03-25T14:48:37.000Z">
+<meta property="article:modified_time" content="2020-04-08T07:55:44.909Z">
+<meta property="article:author" content="Tony">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://robyang203.github.io/react-setting/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: false,
+    isPage: true,
+    isArchive: false
+  };
+</script>
+
+  <title>react_setting | Tony's Blog
+  </title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tony's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+  
+  
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+    
+    
+    
+    <div class="post-block" lang="en">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">react_setting
+</h1>
+
+<div class="post-meta">
+  
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <h2 id="React-設定"><a href="#React-設定" class="headerlink" title="React 設定"></a>React 設定</h2><h3 id="下載套件"><a href="#下載套件" class="headerlink" title="下載套件"></a>下載套件</h3><ul>
+<li><p>dev 環境</p>
+<ul>
+<li>@babel/core<ul>
+<li>babel 核心 api</li>
+</ul>
+</li>
+<li>@babel/preset-env<ul>
+<li>轉譯 es2015</li>
+</ul>
+</li>
+<li>@babel/preset-react<ul>
+<li>轉譯 jsx</li>
+</ul>
+</li>
+<li>babel-loader<ul>
+<li>babel 轉譯工具</li>
+</ul>
+</li>
+<li>@babel/plugin-proposal-class-properties</li>
+<li>babel-plugin-transform-class-properties<ul>
+<li>可以在 class 內宣告 Arrow function</li>
+<li>在 <code>.babelrc</code>要加上屬性</li>
+</ul>
+</li>
+<li>style-loader </li>
+<li>css-loader</li>
+</ul>
+</li>
+<li><p>react</p>
+</li>
+<li><p>react-dom </p>
+</li>
+</ul>
+<h3 id="webpack-設定"><a href="#webpack-設定" class="headerlink" title="webpack 設定"></a>webpack 設定</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>); <span class="comment">//取得路徑</span></span><br><span class="line"><span class="keyword">var</span> webpack = <span class="built_in">require</span>(<span class="string">'webpack'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports=&#123;</span><br><span class="line">	entry:[<span class="comment">//執行點</span></span><br><span class="line">		<span class="string">"./main.jsx"</span></span><br><span class="line">	],</span><br><span class="line">	output:&#123;<span class="comment">//編譯輸出點</span></span><br><span class="line">		path:path.join(__dirname,<span class="string">"dist"</span>),<span class="comment">//輸出路徑</span></span><br><span class="line">		filename:<span class="string">"compiled.js"</span>,<span class="comment">//編譯後的檔名</span></span><br><span class="line">		publicPath:<span class="string">"/"</span><span class="comment">//編譯後資源儲存的位置</span></span><br><span class="line">	&#125;,</span><br><span class="line">	resolve:&#123;<span class="comment">//當 import | require 時，會去指定目錄尋找 &amp; 解析</span></span><br><span class="line">		modules:[</span><br><span class="line">			path.resolve(__dirname,<span class="string">'src'</span>), <span class="string">'node_modules'</span><span class="comment">//尋找指定資料夾</span></span><br><span class="line">		],</span><br><span class="line">		extensions:[<span class="string">'.js'</span>,<span class="string">'jsx'</span>,<span class="string">'css'</span>,<span class="string">'scss'</span>]<span class="comment">//尋找指定副檔名</span></span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="built_in">module</span>:&#123;<span class="comment">//針對不同的語言載入不同的模組 ex:babel、TypeScript，讓其可編譯後輸出成為直譯器所讀的檔案 .js</span></span><br><span class="line">		rules:[</span><br><span class="line">			&#123;</span><br><span class="line">				test:<span class="regexp">/\.(js|jsx)$/</span>,<span class="comment">//判斷是否為".js or jsx"</span></span><br><span class="line">				loader:<span class="string">"babel-loader"</span>,<span class="comment">//編譯器，把符合條件的檔案，編譯成指定樣式</span></span><br><span class="line">				exclude:<span class="regexp">/node_modules/</span></span><br><span class="line">			&#125;,</span><br><span class="line">			&#123;</span><br><span class="line">				test:<span class="regexp">/\.css$/</span>,<span class="comment">//判斷是否為".css"</span></span><br><span class="line">				loader:[<span class="string">"css-loader"</span>,<span class="string">"style-loader"</span>],<span class="comment">//編譯器，把符合條件的檔案，編譯成指定樣式</span></span><br><span class="line">				exclude:<span class="regexp">/node_modules/</span></span><br><span class="line">			&#125;</span><br><span class="line">		]</span><br><span class="line">	&#125;,</span><br><span class="line">	devtool:<span class="string">'cheap-module-eval-source-map'</span>,</span><br><span class="line">	plugins:[</span><br><span class="line">		<span class="keyword">new</span> webpack.HotModuleReplacementPlugin(),<span class="comment">//在不更新頁面的情況下更新Module</span></span><br><span class="line">		<span class="keyword">new</span> webpack.ProvidePlugin(&#123;</span><br><span class="line">			React:<span class="string">'react'</span>,</span><br><span class="line">			RectDOM:<span class="string">'react-dom'</span></span><br><span class="line">        &#125;),<span class="comment">//建置時，碰到輸入的 key 直接 import，指定 value</span></span><br><span class="line">        <span class="keyword">new</span> HtmlWebpackPlugin()<span class="comment">//會根據config設定在，路徑 output.path 建立html文件</span></span><br><span class="line">	]</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="babelrc-設定"><a href="#babelrc-設定" class="headerlink" title=".babelrc 設定"></a>.babelrc 設定</h3><ul>
+<li>語法轉譯器</li>
+<li>對 jsx 進行轉譯</li>
+<li>參數 <ul>
+<li>presets <ul>
+<li>預設轉譯器</li>
+</ul>
+</li>
+<li>env <ul>
+<li>針對環境設置<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"presets"</span>: [</span><br><span class="line">      [</span><br><span class="line">        <span class="string">"@babel/preset-env"</span>,</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">"targets"</span>: &#123;</span><br><span class="line">            <span class="comment">// 設定需要翻譯 es2015 的瀏覽器最低版本</span></span><br><span class="line">            <span class="attr">"edge"</span>: <span class="number">17</span>,</span><br><span class="line">            <span class="attr">"firefox"</span>: <span class="number">60</span>,</span><br><span class="line">            <span class="attr">"chrome"</span>: <span class="number">67</span>,</span><br><span class="line">            <span class="attr">"safari"</span>: <span class="number">11.1</span></span><br><span class="line">          &#125;,</span><br><span class="line">          <span class="comment">// 設定針對 es6 有用到的套件在導入</span></span><br><span class="line">          <span class="attr">"useBuiltIns"</span>: <span class="string">"usage"</span></span><br><span class="line">        &#125;</span><br><span class="line">      ],</span><br><span class="line">      <span class="string">"@babel/preset-react"</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">"plugins"</span>: [<span class="string">"transform-class-properties"</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      </div>
+      
+      
+      
+    </div>
+    
+
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#React-設定"><span class="nav-number">1.</span> <span class="nav-text">React 設定</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下載套件"><span class="nav-number">1.1.</span> <span class="nav-text">下載套件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#webpack-設定"><span class="nav-number">1.2.</span> <span class="nav-text">webpack 設定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#babelrc-設定"><span class="nav-number">1.3.</span> <span class="nav-text">.babelrc 設定</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Tony</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tony</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

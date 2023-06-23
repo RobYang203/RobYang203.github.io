@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://robyang203.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="React ToDoList程式碼https:&#x2F;&#x2F;github.com&#x2F;RobYang203&#x2F;ReactToDoList.git 資料結構 id - number position - number 所處陣列位置   type - string w &#x3D; 待辦 d &#x3D; 刪除 f &#x3D; 結束   date - date string description - string1234567&amp;#123;">
+<meta property="og:type" content="website">
+<meta property="og:title" content="reac-todolist">
+<meta property="og:url" content="https://robyang203.github.io/react-todolist/index.html">
+<meta property="og:site_name" content="Tony&#39;s Blog">
+<meta property="og:description" content="React ToDoList程式碼https:&#x2F;&#x2F;github.com&#x2F;RobYang203&#x2F;ReactToDoList.git 資料結構 id - number position - number 所處陣列位置   type - string w &#x3D; 待辦 d &#x3D; 刪除 f &#x3D; 結束   date - date string description - string1234567&amp;#123;">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-04-02T13:46:10.000Z">
+<meta property="article:modified_time" content="2020-04-02T16:44:06.299Z">
+<meta property="article:author" content="Tony">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://robyang203.github.io/react-todolist/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: false,
+    isPage: true,
+    isArchive: false
+  };
+</script>
+
+  <title>reac-todolist | Tony's Blog
+  </title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tony's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+  
+  
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+    
+    
+    
+    <div class="post-block" lang="en">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">reac-todolist
+</h1>
+
+<div class="post-meta">
+  
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <h1 id="React-ToDoList"><a href="#React-ToDoList" class="headerlink" title="React ToDoList"></a>React ToDoList</h1><h3 id="程式碼"><a href="#程式碼" class="headerlink" title="程式碼"></a>程式碼</h3><p><a href="https://github.com/RobYang203/ReactToDoList.git" target="_blank" rel="noopener">https://github.com/RobYang203/ReactToDoList.git</a></p>
+<h4 id="資料結構"><a href="#資料結構" class="headerlink" title="資料結構"></a>資料結構</h4><ul>
+<li>id - number</li>
+<li>position - number<ul>
+<li>所處陣列位置</li>
+</ul>
+</li>
+<li>type - string<ul>
+<li>w = 待辦</li>
+<li>d = 刪除</li>
+<li>f = 結束</li>
+</ul>
+</li>
+<li>date - date string</li>
+<li>description - string<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    id:<span class="number">0</span>,</span><br><span class="line">    position:<span class="number">0</span>,</span><br><span class="line">    type: <span class="string">'w'</span>,</span><br><span class="line">    date:<span class="string">'2020-03-27T00:00:00'</span>,</span><br><span class="line">    description:<span class="string">'do what'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="畫面"><a href="#畫面" class="headerlink" title="畫面"></a>畫面</h4></li>
+<li>外框<ul>
+<li>輸入區<ul>
+<li>輸入框</li>
+<li>確認按鈕</li>
+</ul>
+</li>
+<li>列表區<ul>
+<li>單筆事項<ul>
+<li>顯示資料</li>
+<li>刪除按鈕</li>
+<li>結束按鈕</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="元件"><a href="#元件" class="headerlink" title="元件"></a>元件</h4><ul>
+<li>App<ul>
+<li>功能<ul>
+<li>維護資料</li>
+<li>建立 InputArea </li>
+<li>根據資料建立 DoThingItem</li>
+<li>接收 DoThingItem 動作來改變資料</li>
+</ul>
+</li>
+<li>流程<ul>
+<li>在 <code>constructor</code> 建立參數<ul>
+<li><strong>DoThingList</strong>  - 待辦資料陣列</li>
+<li><strong>DoThingCompList</strong>- DoThingItem 元件陣列</li>
+<li><strong>state.modifyType</strong> 判斷目前執行動作</li>
+</ul>
+</li>
+<li>針對資料建立三種function<ul>
+<li><code>insertItem(text)</code> <ul>
+<li>新增代辦事項到<strong>DoThingList</strong></li>
+<li>參數<ul>
+<li>text - 需要代辦的事項</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>finishItem(pos , type)</code><ul>
+<li>待辦事項完成</li>
+<li>參數<ul>
+<li>pos - 在<strong>DoThingList</strong>的位置</li>
+<li>type - 切換類型 w | f</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>deletItem(pos)</code><ul>
+<li>刪除代辦事項</li>
+<li>參數<ul>
+<li>pos - 在<strong>DoThingList</strong>的位置</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>建立 Component<ul>
+<li><code>createItemCompList</code><ul>
+<li>根據 <strong>DoThingList</strong> 去建立 DoThingItem</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>在<code>getDerivedStateFromProps</code> 初始化 state 資訊 </li>
+<li>在<code>shouldComponentUpdate</code> 驗證是否需要 <strong>re-render</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>InputArea<ul>
+<li>功能<ul>
+<li>在<code>輸入區</code>輸入待辦事項</li>
+<li>按下<code>確認按鈕</code>，建立一筆資料格式，保存在<code>外框</code>並在<code>列表區</code>顯示</li>
+</ul>
+</li>
+<li>流程<ul>
+<li>從 App 傳入 <code>insertItem function</code>，供資料回傳</li>
+<li>建立 <code>sendDate function</code><ul>
+<li>當<code>Add按鈕</code>按下去時啟動</li>
+<li>沒有輸入會跳出警告視窗</li>
+<li>有輸入透過<code>this.props.insertItem</code>回傳資料</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>DoThingItem<ul>
+<li>功能    <ul>
+<li><code>列表區</code> 根據資料建立<code>單筆事項</code></li>
+<li>按下<code>結束按鈕</code>，判斷目前資料<strong>type</strong>，訊號送至<code>外框</code>改變狀態<ul>
+<li><code>type = w</code> 轉 <strong>f</strong></li>
+<li><code>type = f</code> 轉 <strong>w</strong></li>
+</ul>
+</li>
+<li>按下<code>刪除按鈕</code>，訊號送至<code>外框</code>，回傳<strong>position</strong>刪除指定資料</li>
+</ul>
+</li>
+<li>流程<ul>
+<li>從 App 傳入 <code>finishItem function ＆ deletItem function</code>，供資料回傳</li>
+<li>從 App 傳入 data ，為代辦事項資料，供給元件設定</li>
+<li><ul>
+<li>在 <code>constructor</code> 建立參數<ul>
+<li>itemClass - 顯示是否完成的<strong>css class</strong><ul>
+<li><code>&quot;&quot;</code> - 尚未完成</li>
+<li><code>checked</code> - 以完成</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>設定 <code>itemClick function</code><ul>
+<li>當按下代辦事項啟動</li>
+</ul>
+</li>
+<li>設定 <code>itemDeletClick function</code><ul>
+<li>當按下刪除按鈕時啟動</li>
+</ul>
+</li>
+<li>在<code>getDerivedStateFromProps</code> 根據<code>props.data</code>初始化 state 資訊     <ul>
+<li>根據 <strong>data.type</strong> 判斷 <strong>itemClass</strong> 的值 </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      </div>
+      
+      
+      
+    </div>
+    
+
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#React-ToDoList"><span class="nav-number">1.</span> <span class="nav-text">React ToDoList</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#程式碼"><span class="nav-number">1.0.1.</span> <span class="nav-text">程式碼</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#資料結構"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">資料結構</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#畫面"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">畫面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#元件"><span class="nav-number">1.0.1.3.</span> <span class="nav-text">元件</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Tony</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tony</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
